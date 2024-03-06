@@ -5,10 +5,14 @@ public class App {
         Carro[] cars = {basico};
         printCars(cars);
 
-        putGas(basico, TipoCombustivel.GASOLINA, 55);
-        System.out.println(basico);
-        drive(basico, 400);
-        System.out.println(basico);
+        testInstance(basico, TipoCombustivel.GASOLINA, 55, 400);
+    }
+
+    private static void testInstance(Carro car, TipoCombustivel gasType, int gasAmount, int driveDistance) {
+        putGas(car, gasType, gasAmount);
+        System.out.println(car);
+        drive(car, driveDistance);
+        System.out.println(car);
     }
 
     private static void printCars(Carro[] cars) {
