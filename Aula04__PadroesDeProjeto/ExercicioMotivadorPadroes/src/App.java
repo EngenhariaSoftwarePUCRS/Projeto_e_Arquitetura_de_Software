@@ -7,9 +7,7 @@ public class App {
 
         putGas(basico, TipoCombustivel.GASOLINA, 55);
         System.out.println(basico);
-        System.out.println("\nViajando com o carro basico");
-        basico.viaja(250);
-        basico.viaja(150);
+        drive(basico, 400);
         System.out.println(basico);
     }
 
@@ -24,5 +22,10 @@ public class App {
         System.out.println("\n\n----------------");
         System.out.println("\nAbastencendo carro basico com gasolina");
         car.abastece(gasType, amount);
+    }
+
+    private static void drive(Carro car, int distance) {
+        System.out.println("\nViajando com o carro " + car.getModelo());
+        car.viaja(distance);
     }
 }
