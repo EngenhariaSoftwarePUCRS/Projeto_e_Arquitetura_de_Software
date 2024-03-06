@@ -20,7 +20,7 @@ public class App {
 
     private static void putGas(Carro car, TipoCombustivel gasType, int amount) {
         System.out.println("\n\n----------------");
-        System.out.println("\nAbastencendo carro basico com gasolina");
+        System.out.println("\nAbastencendo carro " + car.getModelo() + " com " + gasType.toString());
         car.abastece(gasType, amount);
     }
 
