@@ -1,10 +1,9 @@
 public class App {
     public static void main(String[] args) throws Exception {
-
         Carro basico = new Carro("Basico", TipoCombustivel.GASOLINA, 10, 55);
 
-        System.out.println("Tipos de veiculos:");
-        System.out.println(basico);
+        Carro[] cars = {basico};
+        printCars(cars);
 
         System.out.println("\n\n----------------");
         System.out.println("\nAbastencendo carro basico com gasolina");
@@ -14,5 +13,12 @@ public class App {
         basico.viaja(250);
         basico.viaja(150);
         System.out.println(basico);
+    }
+
+    private static void printCars(Carro[] cars) {
+        System.out.println("Tipos de veiculos:");
+        for (Carro car : cars) {
+            System.out.println(car);
+        }
     }
 }
