@@ -5,9 +5,7 @@ public class App {
         Carro[] cars = {basico};
         printCars(cars);
 
-        System.out.println("\n\n----------------");
-        System.out.println("\nAbastencendo carro basico com gasolina");
-        basico.abastece(TipoCombustivel.GASOLINA, 55);
+        putGas(basico, TipoCombustivel.GASOLINA, 55);
         System.out.println(basico);
         System.out.println("\nViajando com o carro basico");
         basico.viaja(250);
@@ -20,5 +18,11 @@ public class App {
         for (Carro car : cars) {
             System.out.println(car);
         }
+    }
+
+    private static void putGas(Carro car, TipoCombustivel gasType, int amount) {
+        System.out.println("\n\n----------------");
+        System.out.println("\nAbastencendo carro basico com gasolina");
+        car.abastece(gasType, amount);
     }
 }
