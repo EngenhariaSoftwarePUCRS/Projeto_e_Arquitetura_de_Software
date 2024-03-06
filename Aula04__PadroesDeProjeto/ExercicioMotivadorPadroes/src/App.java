@@ -2,12 +2,14 @@ public class App {
     public static void main(String[] args) throws Exception {
         Carro basico = new Carro("Basico", TipoCombustivel.GASOLINA, 10, 55);
         Carro esportivo = new Carro("Esportivo", TipoCombustivel.GASOLINA, 6, 45);
+        Carro utilitario = new Carro("Utilitario", TipoCombustivel.DIESEL, 5, 70);
 
-        Carro[] cars = {basico, esportivo};
+        Carro[] cars = {basico, esportivo, utilitario};
         printCars(cars);
 
         testInstance(basico, TipoCombustivel.GASOLINA, 55, 400);
         testInstance(esportivo, TipoCombustivel.GASOLINA, 45, 250);
+        testInstance(utilitario, TipoCombustivel.DIESEL, 70, 520);
     }
 
     private static void testInstance(Carro car, TipoCombustivel gasType, int gasAmount, int driveDistance) {
