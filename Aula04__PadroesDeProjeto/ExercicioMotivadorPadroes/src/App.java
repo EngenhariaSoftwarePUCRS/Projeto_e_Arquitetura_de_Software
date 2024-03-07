@@ -4,6 +4,7 @@ public class App {
         Carro esportivo = new Carro("Esportivo", TipoCombustivel.GASOLINA, TipoCombustivel.GASOLINA, 6, 45);
         Carro utilitario = new Carro("Utilitario", TipoCombustivel.DIESEL, TipoCombustivel.DIESEL, 5, 70);
         Carro suv = new Carro("SUV", TipoCombustivel.GASOLINA, TipoCombustivel.FLEX, 8, 55);
+        Carro suvFlex = new Carro("SUVFlex", TipoCombustivel.FLEX, TipoCombustivel.FLEX, 8, 55);
 
         Carro[] cars = {basico, esportivo, utilitario, suv};
         printCars(cars);

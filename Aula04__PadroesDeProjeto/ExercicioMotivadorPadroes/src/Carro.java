@@ -1,15 +1,16 @@
-public class Carro {
+import java.util.Map;
+import java.util.HashMap;
 
+public class Carro {
     private String modelo;
     private Motor motor;
     private TanqueCombustivel tanque;
 
     public Carro(
         String modelo,
-        TipoCombustivel tipoCombustivelMotor,
         TipoCombustivel tipoCombustivelTanque,
-        int consumoMotor,
-        int capacidadeTanque) {
+        int capacidadeTanque,
+        Map<int, TipoCombustivel> consumoPorTipoCombustivel) {
         this.modelo = modelo;
         motor = new Motor(tipoCombustivelMotor, consumoMotor);
         tanque = new TanqueCombustivel(tipoCombustivelTanque, capacidadeTanque);
