@@ -1,25 +1,21 @@
-import java.util.Arrays;
-import java.util.Map;
-
 public class TanqueCombustivel {
-    private Map<TipoCombustivel, int> capacidadePorTipoCombustivel;
+
+    private TipoCombustivel tipoCombustivel;
+    private int capacidade;
     private int combustivelDisponivel;
 
-    public TanqueCombustivel(Map<TipoCombustivel, int> capacidadePorTipoCombustivel) {
-        this.capacidadePorTipoCombustivel = capacidadePorTipoCombustivel;
+    public TanqueCombustivel(TipoCombustivel tipoCombustivel, int capacidade) {
+        this.tipoCombustivel = tipoCombustivel;
+        this.capacidade = capacidade;
         this.combustivelDisponivel = 0;
     }
 
-    public Array<TipoCombustivel> getTiposCombustivel() {
-        return capacidadePorTipoCombustivel.keys();
+    public TipoCombustivel getTipoCombustivel() {
+        return tipoCombustivel;
     }
 
-    public Map<TipoCombustivel, int> getCapacidadePorTipoDeCombustivel() {
-        return this.capacidadePorTipoCombustivel;
-    }
-
-    public int getCapacidade(TipoCombustivel tipoCombustivel) {
-        return capacidade.get(tipoCombustivel);
+    public int getCapacidade() {
+        return capacidade;
     }
 
     public int getCombustivelDisponivel() {
