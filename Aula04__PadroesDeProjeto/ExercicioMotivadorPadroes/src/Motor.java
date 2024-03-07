@@ -1,27 +1,42 @@
-public class Motor {
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
-    private TipoCombustivel tipoMotor;
-    private int consumo; // em quilometros por unidade. Ex: Km/Lt
+public class Motor {
+    private Map<TipoCombustivel, Integer> consumoPorTipoCombustivel;
     private int quilometragem;
 
     public Motor(TipoCombustivel tipoMotor, int consumo) {
-        this.tipoMotor = tipoMotor;
-        this.consumo = consumo;
+        Map<TipoCombustivel, Integer> consumoPorTipoCombustivel = new HashMap<TipoCombustivel, Integer>(1);
+        consumoPorTipoCombustivel.put(tipoMotor, consumo);
+        this.consumoPorTipoCombustivel = consumoPorTipoCombustivel;
+    }
+
+    public Motor(Map<TipoCombustivel, Integer> consumoPorTipoCombustivel) {
+        this.consumoPorTipoCombustivel = consumoPorTipoCombustivel;
     }
 
     public int getConsumo() {
-        return this.consumo;
+        if (consumoPorTipoCombustivel.size() != 1) {
+            throw new IllegalStateException("Motor com mais de um tipo de combustivel. Favor explicitar o tipo desejado.");
+        }
+        return consumoPorTipoCombustivel.values().iterator().next();
     }
 
-    public TipoCombustivel getTipoMotor(){
-        return this.tipoMotor;
+    public int getConsumo(TipoCombustivel tipoCombustivel) {
+        return consumoPorTipoCombustivel.get(tipoCombustivel);
+    }
+
+    public Set<TipoCombustivel> getTiposCombustivelMotor() {
+        return consumoPorTipoCombustivel.keySet();
     }
 
     public int getQuilometragem(){
         return this.quilometragem;
     }
 
-    public int combustivelNecessario(int distancia) {
+    public int combustivelNecessario(int distancia, TipoCombustivel tipoCombustivel) {
+        int consumo = consumoPorTipoCombustivel.get(tipoCombustivel);
         return distancia / consumo;
     }
 
@@ -29,8 +44,16 @@ public class Motor {
         quilometragem += distancia;
     }
 
+    private String getConsumoPorTipoCombustivel() {
+        return consumoPorTipoCombustivel.toString();
+    }
+
+    private String getTiposCombustivelMotorString() {
+        return consumoPorTipoCombustivel.keySet().toString();
+    }
+
     @Override
     public String toString() {
-        return "Motor [consumo=" + consumo + ", quilometragem=" + quilometragem + ", tipoMotor=" + tipoMotor + "]";
+        return "Motor [consumo=" + getConsumoPorTipoCombustivel() + ", quilometragem=" + quilometragem + ", tipoMotor=" + getTiposCombustivelMotorString() + "]";
     }
 }

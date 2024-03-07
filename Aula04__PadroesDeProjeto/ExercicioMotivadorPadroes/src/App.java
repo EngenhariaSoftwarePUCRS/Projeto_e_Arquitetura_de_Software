@@ -1,17 +1,27 @@
+import java.util.HashMap;
+import java.util.Map;
+
 public class App {
     public static void main(String[] args) throws Exception {
-        Carro basico = new Carro("Basico", TipoCombustivel.GASOLINA, TipoCombustivel.GASOLINA, 10, 55);
-        Carro esportivo = new Carro("Esportivo", TipoCombustivel.GASOLINA, TipoCombustivel.GASOLINA, 6, 45);
-        Carro utilitario = new Carro("Utilitario", TipoCombustivel.DIESEL, TipoCombustivel.DIESEL, 5, 70);
-        Carro suv = new Carro("SUV", TipoCombustivel.GASOLINA, TipoCombustivel.FLEX, 8, 55);
+        Carro basico = new Carro("Basico", 55, TipoCombustivel.GASOLINA, TipoCombustivel.GASOLINA, 10);
+        Carro esportivo = new Carro("Esportivo", 45, TipoCombustivel.GASOLINA, TipoCombustivel.GASOLINA, 6);
+        Carro utilitario = new Carro("Utilitario", 70, TipoCombustivel.DIESEL, TipoCombustivel.DIESEL, 5);
+        Map<TipoCombustivel, Integer> consumoGasolinaSuv = new HashMap<TipoCombustivel, Integer>();
+        consumoGasolinaSuv.put(TipoCombustivel.GASOLINA, 8);
+        Carro suv = new Carro("SUV", 55, consumoGasolinaSuv);
+        Map<TipoCombustivel, Integer> consumoGasolinaSuvFlex = new HashMap<TipoCombustivel, Integer>();
+        consumoGasolinaSuvFlex.put(TipoCombustivel.GASOLINA, 8);
+        consumoGasolinaSuvFlex.put(TipoCombustivel.ALCOOL, 6);
+        Carro suvFlex = new Carro("SUVFlex", 65, consumoGasolinaSuvFlex);
 
-        Carro[] cars = {basico, esportivo, utilitario, suv};
+        Carro[] cars = {basico, esportivo, utilitario, suv, suvFlex};
         printCars(cars);
 
         testInstance(basico, TipoCombustivel.GASOLINA, 55, 400);
         testInstance(esportivo, TipoCombustivel.GASOLINA, 45, 250);
         testInstance(utilitario, TipoCombustivel.DIESEL, 70, 520);
         testInstance(suv, TipoCombustivel.GASOLINA, 55, 250);
+        testInstance(suvFlex, TipoCombustivel.ALCOOL, 65, 300);
     }
 
     private static void testInstance(Carro car, TipoCombustivel gasType, int gasAmount, int driveDistance) {
