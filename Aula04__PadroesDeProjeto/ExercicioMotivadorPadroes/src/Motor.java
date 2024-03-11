@@ -5,6 +5,8 @@ import java.util.Set;
 public class Motor {
     private Map<TipoCombustivel, Integer> consumoPorTipoCombustivel;
     private int quilometragem;
+    private int consumoMaximo;
+    private Map<Integer, Integer> decaimentoPorKmAndado;
 
     public Motor(TipoCombustivel tipoMotor, int consumo) {
         Map<TipoCombustivel, Integer> consumoPorTipoCombustivel = new HashMap<TipoCombustivel, Integer>(1);
@@ -14,6 +16,14 @@ public class Motor {
 
     public Motor(Map<TipoCombustivel, Integer> consumoPorTipoCombustivel) {
         this.consumoPorTipoCombustivel = consumoPorTipoCombustivel;
+    }
+
+    public Motor(TipoCombustivel tipoMotor, int consumoMinimo, int consumoMaximo, Map<Integer, Integer> decaimentoPorKmAndado) {
+        Map<TipoCombustivel, Integer> consumoPorTipoCombustivel = new HashMap<TipoCombustivel, Integer>(1);
+        consumoPorTipoCombustivel.put(tipoMotor, consumoMinimo);
+        this.consumoPorTipoCombustivel = consumoPorTipoCombustivel;
+        this.consumoMaximo = consumoMaximo;
+        this.decaimentoPorKmAndado = decaimentoPorKmAndado;
     }
 
     public int getConsumo() {
@@ -42,6 +52,26 @@ public class Motor {
 
     public void percorre(int distancia) {
         quilometragem += distancia;
+
+        if (decaimentoPorKmAndado == null) {
+            return;
+        }
+
+        if (decaimentoPorKmAndado.size() != 1) {
+            throw new IllegalArgumentException("Funcionalidade não implementada");
+        }
+
+        int kmParaDecair = decaimentoPorKmAndado.keySet().iterator().next();
+        int consumoParaDecair = decaimentoPorKmAndado.values().iterator().next();
+        int decaimentoPorKm = consumoParaDecair / kmParaDecair;
+
+        int decaimento = distancia / kmParaDecair * decaimentoPorKm;
+        int consumo = getConsumo();
+        int novoConsumo = consumo + decaimento;
+        if (novoConsumo > consumoMaximo) {
+            novoConsumo = consumoMaximo;
+        }
+        consumoPorTipoCombustivel.put(getTiposCombustivelMotor().iterator().next(), novoConsumo);
     }
 
     private String getConsumoPorTipoCombustivel() {

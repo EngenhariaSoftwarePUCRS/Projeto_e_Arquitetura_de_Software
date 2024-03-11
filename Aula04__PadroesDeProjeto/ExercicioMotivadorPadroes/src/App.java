@@ -13,8 +13,11 @@ public class App {
         consumoGasolinaSuvFlex.put(TipoCombustivel.GASOLINA, 8);
         consumoGasolinaSuvFlex.put(TipoCombustivel.ALCOOL, 6);
         Carro suvFlex = new Carro("SUVFlex", 65, consumoGasolinaSuvFlex);
+        Map<Integer, Integer> decaimentoPorKmAndado = new HashMap<Integer, Integer>();
+        decaimentoPorKmAndado.put(5000, 1);
+        Carro econo = new Carro("Econo", 55, TipoCombustivel.GASOLINA, 20, 10, decaimentoPorKmAndado);
 
-        Carro[] cars = {basico, esportivo, utilitario, suv, suvFlex};
+        Carro[] cars = {basico, esportivo, utilitario, suv, suvFlex, econo};
         printCars(cars);
 
         testInstance(basico, TipoCombustivel.GASOLINA, 55, 400);
@@ -22,6 +25,7 @@ public class App {
         testInstance(utilitario, TipoCombustivel.DIESEL, 70, 520);
         testInstance(suv, TipoCombustivel.GASOLINA, 55, 250);
         testInstance(suvFlex, TipoCombustivel.ALCOOL, 65, 300);
+        testInstance(econo, TipoCombustivel.GASOLINA, 55, 400);
     }
 
     private static void testInstance(Carro car, TipoCombustivel gasType, int gasAmount, int driveDistance) {

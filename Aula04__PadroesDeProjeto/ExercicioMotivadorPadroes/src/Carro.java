@@ -33,6 +33,24 @@ public class Carro {
         tanque = new TanqueCombustivel(TipoCombustivel.FLEX, capacidadeTanque);
     }
 
+    /**
+     * Construtor para carros com consumo que decai ao longo do tempo
+     * 
+     * *consumo/decaimento em Litros por Km
+     */
+    public Carro(
+        String modelo,
+        int capacidadeTanque,
+        TipoCombustivel tipoCombustivel,
+        int consumoNovo,
+        int consumoEstabilizado,
+        Map<Integer, Integer> decaimentoPorKmAndado
+    ) {
+        this.modelo = modelo;
+        motor = new Motor(tipoCombustivel, consumoNovo, consumoEstabilizado, decaimentoPorKmAndado);
+        tanque = new TanqueCombustivel(tipoCombustivel, capacidadeTanque);
+    }
+
     public String getModelo() {
         return modelo;
     }
