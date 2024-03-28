@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sistema Academico</title>
+    <script src="academico.js"></script>
+</head>
+<body>
+    <h1>Informações do estudante</h1>
+    <p>Entre a matricula do estudante:</p>
+    <input type="number" id="matriculaInformada">
+    <p>Selecione a opção desejada:</p>
+    <select id="opcaoDesejada" onchange="executaAcao()">
+        <option value="nenhuma">Nenhuma</option>
+        <option value="frequencia">Frequencia</option>
+        <option value="notasParciais">Notas parciais</option>
+        <option value="mediaFinal">Media final</option>
+        <option value="aprovacao">Aprovacao</option>
+    </select>
+    <p id="resposta"></p>
+    
+    <script>
+        carregaBD();
+        function executaAcao(){
+            let matriculaInformada = document.getElementById("matriculaInformada").value;
+            let selectElement = document.getElementById("opcaoDesejada");
+            let opcaoDesejada = selectElement.options[selectElement.selectedIndex].value;
+            let resposta = academico(matriculaInformada,opcaoDesejada);
+            document.getElementById("resposta").innerHTML =
+                "Aluno: " + matriculaInformada + ", " + resposta;
+        }
+    </script>
+</body>
+</html>
+
+
