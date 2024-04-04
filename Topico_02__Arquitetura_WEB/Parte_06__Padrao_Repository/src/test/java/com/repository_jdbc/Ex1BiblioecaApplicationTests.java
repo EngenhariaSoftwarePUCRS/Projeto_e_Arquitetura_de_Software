@@ -1,4 +1,4 @@
-package com.parte_06__padrao_repository.ex1biblioeca;
+package com.repository_jdbc;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

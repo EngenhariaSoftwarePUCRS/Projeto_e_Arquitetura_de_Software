@@ -1,21 +1,21 @@
-package com.parte_06__padrao_repository.ex1biblioeca;
+package com.repository_jdbc;
 
-import java.util.LinkedList;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
+
 
 @Repository
 public class AcervoMemoriaImpl implements IAcervoRepository {
     private List<Livro> livros;
 
     public AcervoMemoriaImpl() {
-        livros = new LinkedList<>();
-
-        livros.add(new Livro(10, "Introdução ao Java", "Huguinho Pato", 2022));
-        livros.add(new Livro(20, "Introdução ao Spring-Boot", "Zezinho Pato", 2020));
-        livros.add(new Livro(15, "Principios SOLID", "Luizinho Pato", 2023));
-        livros.add(new Livro(17, "Padroes de Projeto", "Lala Pato", 2019));
+        livros = List.of(
+            new Livro(10, "Introdução ao Java", "Huguinho Pato", 2022),
+            new Livro(20, "Introdução ao Spring-Boot", "Zezinho Pato", 2020),
+            new Livro(15, "Principios SOLID", "Luizinho Pato", 2023),
+            new Livro(17, "Padroes de Projeto", "Lala Pato", 2019)
+        );
     }
 
     @Override
