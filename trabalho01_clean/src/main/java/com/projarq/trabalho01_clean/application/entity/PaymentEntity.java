@@ -1,6 +1,6 @@
 package com.projarq.trabalho01_clean.application.entity;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 import com.projarq.trabalho01_clean.application.entity.SignatureEntity;
 
@@ -13,7 +13,13 @@ public class PaymentEntity {
     //Valor pago
     private float payedValue;
     //Data em que o pagamento foi efetuado
-    private LocalDate paymentDate;
+    private Date paymentDate;
     //Código correspondente a uma promoção usada no pagamento. Pode ser um "none" no caso de não ser usado código nenhum
     private String promotion;
+    //Status do pagamento
+    private Status status;
+}
+
+enum Status {
+    PAGAMENTO_OK, PROMOCAO_INVALIDA, VALOR_INCORRETO
 }
