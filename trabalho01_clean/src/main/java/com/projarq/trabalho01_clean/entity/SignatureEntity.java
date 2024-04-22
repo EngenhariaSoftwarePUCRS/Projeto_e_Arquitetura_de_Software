@@ -1,9 +1,9 @@
-package com.projarq.trabalho01_clean.application.entity;
+package com.projarq.trabalho01_clean.entity;
 
 import java.time.LocalDate;
 
-import com.projarq.trabalho01_clean.application.entity.AppEntity;
-import com.projarq.trabalho01_clean.application.entity.ClientEntity;
+import com.projarq.trabalho01_clean.entity.AppEntity;
+import com.projarq.trabalho01_clean.entity.ClientEntity;
 
 public class SignatureEntity {
 

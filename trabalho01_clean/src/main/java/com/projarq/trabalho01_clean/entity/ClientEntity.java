@@ -1,4 +1,4 @@
-package com.projarq.trabalho01_clean.application.entity;
+package com.projarq.trabalho01_clean.entity;
 
 public class ClientEntity { 
     

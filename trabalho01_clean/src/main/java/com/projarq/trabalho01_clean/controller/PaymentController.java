@@ -1,4 +1,4 @@
-package com.projarq.trabalho01_clean.application.controller;
+package com.projarq.trabalho01_clean.controller;
 
 import java.util.Date;
 
@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.projarq.trabalho01_clean.application.entity.PaymentEntity;
-import com.projarq.trabalho01_clean.application.repository.IPaymentRepository;
+import com.projarq.trabalho01_clean.entity.PaymentEntity;
+import com.projarq.trabalho01_clean.repository.IPaymentRepository;
 
 @RestController
 public class PaymentController {

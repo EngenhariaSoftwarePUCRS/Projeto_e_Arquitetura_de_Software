@@ -1,9 +1,9 @@
-package com.projarq.trabalho01_clean.application.repository;
+package com.projarq.trabalho01_clean.repository;
 
 import java.util.List;
 
-import com.projarq.trabalho01_clean.application.entity.AppEntity;
-import com.projarq.trabalho01_clean.application.entity.ClientEntity;
+import com.projarq.trabalho01_clean.entity.AppEntity;
+import com.projarq.trabalho01_clean.entity.ClientEntity;
 
 public interface IAppRepository{
     AppEntity create(Long id, String name, float monthlyCost);

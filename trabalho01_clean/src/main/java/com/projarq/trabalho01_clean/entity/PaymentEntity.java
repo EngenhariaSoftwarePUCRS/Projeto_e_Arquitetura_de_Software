@@ -1,8 +1,8 @@
-package com.projarq.trabalho01_clean.application.entity;
+package com.projarq.trabalho01_clean.entity;
 
 import java.util.Date;
 
-import com.projarq.trabalho01_clean.application.entity.SignatureEntity;
+import com.projarq.trabalho01_clean.entity.SignatureEntity;
 
 public class PaymentEntity {
 

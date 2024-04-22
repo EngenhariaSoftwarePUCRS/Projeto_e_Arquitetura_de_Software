@@ -1,4 +1,4 @@
-package com.projarq.trabalho01_clean.application.controller;
+package com.projarq.trabalho01_clean.controller;
 
 import org.springframework.web.bind.annotation.RestController;
 
