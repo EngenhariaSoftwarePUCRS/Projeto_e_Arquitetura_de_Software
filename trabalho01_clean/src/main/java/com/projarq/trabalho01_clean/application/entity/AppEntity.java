@@ -1,4 +1,4 @@
-package com.projarq.trabalho01_clean.app;
+package com.projarq.trabalho01_clean.application.entity;
 
 public class AppEntity {
 

@@ -1,4 +1,4 @@
-package com.projarq.trabalho01_clean.user;
+package com.projarq.trabalho01_clean.application.entity;
 
 public class UserEntity { 
 
