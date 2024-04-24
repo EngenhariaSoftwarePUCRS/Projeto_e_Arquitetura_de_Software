@@ -1,4 +1,4 @@
-package com.projarq.trabalho01_clean.controller;
+package com.projarq.trabalho01_clean.interfaceAdaptors.controller;
 
 import java.util.List;
 
@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.projarq.trabalho01_clean.entity.SignatureEntity;
-import com.projarq.trabalho01_clean.repository.ISignatureRepository;
+import com.projarq.trabalho01_clean.domain.entity.SignatureEntity;
+import com.projarq.trabalho01_clean.domain.repository.ISignatureRepository;
 
 @RestController
 public class SignatureController {

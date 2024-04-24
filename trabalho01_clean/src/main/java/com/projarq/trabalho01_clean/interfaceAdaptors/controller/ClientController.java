@@ -1,12 +1,13 @@
-package com.projarq.trabalho01_clean.controller;
+package com.projarq.trabalho01_clean.interfaceAdaptors.controller;
 
 import java.util.List;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.projarq.trabalho01_clean.entity.ClientEntity;
-import com.projarq.trabalho01_clean.repository.IClientRepository;
+
+import com.projarq.trabalho01_clean.domain.entity.ClientEntity;
+import com.projarq.trabalho01_clean.domain.repository.IClientRepository;
 
 @RestController
 public class ClientController {

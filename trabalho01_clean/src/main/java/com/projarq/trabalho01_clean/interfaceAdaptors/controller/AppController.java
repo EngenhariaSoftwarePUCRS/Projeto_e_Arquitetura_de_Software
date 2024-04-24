@@ -1,4 +1,4 @@
-package com.projarq.trabalho01_clean.controller;
+package com.projarq.trabalho01_clean.interfaceAdaptors.controller;
 
 import java.util.List;
 
@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.projarq.trabalho01_clean.entity.AppEntity;
-import com.projarq.trabalho01_clean.repository.IAppRepository;
+import com.projarq.trabalho01_clean.domain.entity.AppEntity;
+import com.projarq.trabalho01_clean.domain.repository.IAppRepository;
 
 import jakarta.websocket.server.PathParam;
 

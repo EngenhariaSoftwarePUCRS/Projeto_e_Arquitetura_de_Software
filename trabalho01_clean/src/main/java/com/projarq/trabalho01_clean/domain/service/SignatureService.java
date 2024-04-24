@@ -1,4 +1,4 @@
-package com.projarq.trabalho01_clean.service;
+package com.projarq.trabalho01_clean.domain.service;
 
 import java.util.List;
 
@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.projarq.trabalho01_clean.entity.SignatureEntity;
-import com.projarq.trabalho01_clean.repository.ISignatureRepository;
+import com.projarq.trabalho01_clean.domain.entity.SignatureEntity;
+import com.projarq.trabalho01_clean.domain.repository.ISignatureRepository;
 
 @Repository
 public class SignatureService implements ISignatureRepository {

@@ -1,4 +1,4 @@
-package com.projarq.trabalho01_clean.service;
+package com.projarq.trabalho01_clean.domain.service;
 
 import java.util.Date;
 import java.util.List;
@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.projarq.trabalho01_clean.entity.PaymentEntity;
-import com.projarq.trabalho01_clean.repository.IPaymentRepository;
+import com.projarq.trabalho01_clean.domain.entity.PaymentEntity;
+import com.projarq.trabalho01_clean.domain.repository.IPaymentRepository;
 
 @Repository
 public class PaymentService implements IPaymentRepository {

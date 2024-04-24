@@ -1,12 +1,12 @@
-package com.projarq.trabalho01_clean.service;
+package com.projarq.trabalho01_clean.domain.service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import com.projarq.trabalho01_clean.entity.ClientEntity;
-import com.projarq.trabalho01_clean.repository.IClientRepository;
+import com.projarq.trabalho01_clean.domain.entity.ClientEntity;
+import com.projarq.trabalho01_clean.domain.repository.IClientRepository;
 
 public class ClientService implements IClientRepository {
     private JdbcTemplate database;

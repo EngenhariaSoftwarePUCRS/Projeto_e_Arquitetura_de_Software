@@ -1,4 +1,4 @@
-package com.projarq.trabalho01_clean.service;
+package com.projarq.trabalho01_clean.domain.service;
 
 import java.util.List;
 
@@ -6,9 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.projarq.trabalho01_clean.entity.AppEntity;
-import com.projarq.trabalho01_clean.entity.ClientEntity;
-import com.projarq.trabalho01_clean.repository.IAppRepository;
+import com.projarq.trabalho01_clean.domain.entity.AppEntity;
+import com.projarq.trabalho01_clean.domain.entity.ClientEntity;
+import com.projarq.trabalho01_clean.domain.repository.IAppRepository;
 
 @Repository
 public class AppService implements IAppRepository {

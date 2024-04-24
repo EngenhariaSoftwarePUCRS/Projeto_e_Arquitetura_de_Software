@@ -1,4 +1,4 @@
-package com.projarq.trabalho01_clean.entity;
+package com.projarq.trabalho01_clean.domain.entity;
 
 public class UserEntity { 
 

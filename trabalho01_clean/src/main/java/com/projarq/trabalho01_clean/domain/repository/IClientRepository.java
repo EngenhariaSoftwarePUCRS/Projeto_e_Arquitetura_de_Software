@@ -1,8 +1,8 @@
-package com.projarq.trabalho01_clean.repository;
+package com.projarq.trabalho01_clean.domain.repository;
 
 import java.util.List;
 
-import com.projarq.trabalho01_clean.entity.ClientEntity;
+import com.projarq.trabalho01_clean.domain.entity.ClientEntity;
 
 public interface IClientRepository{
     ClientEntity create(Long id, String name, String email);

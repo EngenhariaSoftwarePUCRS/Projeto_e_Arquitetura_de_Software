@@ -1,9 +1,10 @@
-package com.projarq.trabalho01_clean.repository;
+package com.projarq.trabalho01_clean.domain.repository;
 
 import java.util.List;
-import java.util.Date;
 
-import com.projarq.trabalho01_clean.entity.PaymentEntity;
+import com.projarq.trabalho01_clean.domain.entity.PaymentEntity;
+
+import java.util.Date;
 
 public interface IPaymentRepository{
     PaymentEntity create(Long signatureId, float payedValue, Date paymentDate, String promotion);

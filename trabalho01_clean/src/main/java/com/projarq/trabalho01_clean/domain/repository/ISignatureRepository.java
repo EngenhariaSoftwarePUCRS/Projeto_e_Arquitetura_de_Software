@@ -1,8 +1,8 @@
-package com.projarq.trabalho01_clean.repository;
+package com.projarq.trabalho01_clean.domain.repository;
 
 import java.util.List;
 
-import com.projarq.trabalho01_clean.entity.SignatureEntity;
+import com.projarq.trabalho01_clean.domain.entity.SignatureEntity;
 
 public interface ISignatureRepository {
     SignatureEntity addSignature (Long clientId, Long appId);
