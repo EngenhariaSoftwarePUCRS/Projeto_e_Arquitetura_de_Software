@@ -2,28 +2,32 @@ package com.projarq.trabalho01_clean.interfaceAdaptors.repository;
 
 import java.util.List;
 
-import com.projarq.trabalho01_clean.domain.entity.SignatureEntity;
-import com.projarq.trabalho01_clean.domain.repository.ISignatureRepository;
+import org.springframework.stereotype.Repository;
 
+import com.projarq.trabalho01_clean.domain.repository.ISignatureRepository;
+import com.projarq.trabalho01_clean.interfaceAdaptors.DTOs.Signature.SignatureType;
+import com.projarq.trabalho01_clean.interfaceAdaptors.DTOs.Signature.SignatureResponse;
+
+@Repository
 public class SignatureRepository implements ISignatureRepository {
 
     @Override
-    public SignatureEntity addSignature(Long clientId, Long appId) {
+    public SignatureResponse addSignature(Long clientId, Long appId) {
         return null;
     }
 
     @Override
-    public List<SignatureEntity> getAppSignatures(Long appId) {
+    public List<SignatureResponse> getAppSignatures(Long appId) {
         return null;
     }
 
     @Override
-    public List<SignatureEntity> getClientSignatures(Long clientID) {
+    public List<SignatureResponse> getClientSignatures(Long clientID) {
         return null;
     }
 
     @Override
-    public List<SignatureEntity> getSignatureByType(Long appId, String type) {
+    public List<SignatureResponse> getSignatureByType(Long appId, SignatureType type) {
         return null;
     }
 

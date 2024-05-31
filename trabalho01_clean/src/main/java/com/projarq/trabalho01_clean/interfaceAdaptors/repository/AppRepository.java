@@ -2,10 +2,13 @@ package com.projarq.trabalho01_clean.interfaceAdaptors.repository;
 
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import com.projarq.trabalho01_clean.domain.entity.AppEntity;
 import com.projarq.trabalho01_clean.domain.entity.ClientEntity;
 import com.projarq.trabalho01_clean.domain.repository.IAppRepository;
 
+@Repository
 public class AppRepository implements IAppRepository {
 
     @Override

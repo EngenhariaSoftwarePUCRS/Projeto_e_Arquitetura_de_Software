@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.projarq.trabalho01_clean.domain.entity.PaymentEntity;
 import com.projarq.trabalho01_clean.domain.repository.IPaymentRepository;
+import com.projarq.trabalho01_clean.interfaceAdaptors.DTOs.Payment.PaymentResponseDTO;
 
 @Repository
 public class PaymentService implements IPaymentRepository {
@@ -20,7 +21,7 @@ public class PaymentService implements IPaymentRepository {
     }
 
     @Override
-    public PaymentEntity create(Long signatureId, float payedValue, Date paymentDate, String promotion) {
+    public PaymentResponseDTO create(Date paymentDate, Long signatureId, double signaturePrice) {
         return null;
     }
 

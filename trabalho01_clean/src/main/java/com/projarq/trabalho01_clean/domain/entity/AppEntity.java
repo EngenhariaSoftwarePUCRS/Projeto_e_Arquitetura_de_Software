@@ -1,8 +1,5 @@
 package com.projarq.trabalho01_clean.domain.entity;
 
-import lombok.Data;
-
-@Data
 public class AppEntity {
 
     //Código identificador do aplicativo
