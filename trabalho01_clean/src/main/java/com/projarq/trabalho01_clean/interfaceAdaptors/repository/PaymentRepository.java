@@ -2,6 +2,8 @@ package com.projarq.trabalho01_clean.interfaceAdaptors.repository;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.projarq.trabalho01_clean.domain.entity.PaymentEntity;
@@ -12,6 +14,12 @@ import java.util.Date;
 
 @Repository
 public class PaymentRepository implements IPaymentRepository {
+    private JdbcTemplate database;
+
+    @Autowired
+    public PaymentRepository(JdbcTemplate database) {
+        this.database = database;
+    }
 
     @Override
     public PaymentResponseDTO create(Date paymentDate, Long signatureId, double signaturePrice) {

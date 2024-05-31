@@ -2,6 +2,8 @@ package com.projarq.trabalho01_clean.interfaceAdaptors.repository;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.projarq.trabalho01_clean.domain.entity.AppEntity;
@@ -10,9 +12,15 @@ import com.projarq.trabalho01_clean.domain.repository.IAppRepository;
 
 @Repository
 public class AppRepository implements IAppRepository {
+    private JdbcTemplate database;
+
+    @Autowired
+    public AppRepository(JdbcTemplate database) {
+        this.database = database;
+    }
 
     @Override
-    public AppEntity create(Long id, String name, float monthlyCost) {
+    public AppEntity create(String name, float monthlyCost) {
         return null;
     }
 

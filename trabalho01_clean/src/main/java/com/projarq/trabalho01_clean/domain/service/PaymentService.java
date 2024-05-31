@@ -3,22 +3,14 @@ package com.projarq.trabalho01_clean.domain.service;
 import java.util.Date;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Repository;
+import org.springframework.context.annotation.Primary;
 
 import com.projarq.trabalho01_clean.domain.entity.PaymentEntity;
 import com.projarq.trabalho01_clean.domain.repository.IPaymentRepository;
 import com.projarq.trabalho01_clean.interfaceAdaptors.DTOs.Payment.PaymentResponseDTO;
 
-@Repository
+@Primary
 public class PaymentService implements IPaymentRepository {
-    private JdbcTemplate database;
-
-    @Autowired
-    public PaymentService(JdbcTemplate database) {
-        this.database = database;
-    }
 
     @Override
     public PaymentResponseDTO create(Date paymentDate, Long signatureId, double signaturePrice) {

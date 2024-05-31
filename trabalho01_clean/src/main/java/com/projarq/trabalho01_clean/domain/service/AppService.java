@@ -1,27 +1,18 @@
 package com.projarq.trabalho01_clean.domain.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Repository;
+import org.springframework.context.annotation.Primary;
 
 import com.projarq.trabalho01_clean.domain.entity.AppEntity;
 import com.projarq.trabalho01_clean.domain.entity.ClientEntity;
 import com.projarq.trabalho01_clean.domain.repository.IAppRepository;
 
-@Repository
+@Primary
 public class AppService implements IAppRepository {
-    private JdbcTemplate database;
-
-    @Autowired
-    public AppService(JdbcTemplate database) {
-        this.database = database;
-    }
 
     @Override
-    public AppEntity create(Long id, String name, float monthlyCost) {
+    public AppEntity create(String name, float monthlyCost) {
         return null;
     }
 

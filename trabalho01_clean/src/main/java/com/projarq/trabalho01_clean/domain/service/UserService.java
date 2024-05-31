@@ -1,17 +1,9 @@
 package com.projarq.trabalho01_clean.domain.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Repository;
+import org.springframework.context.annotation.Primary;
 
 import com.projarq.trabalho01_clean.domain.repository.IUserRepository;
 
-@Repository
+@Primary
 public class UserService implements IUserRepository {
-    private JdbcTemplate database;
-
-    @Autowired
-    public UserService(JdbcTemplate database) {
-        this.database = database;
-    }
 }

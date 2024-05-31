@@ -23,6 +23,12 @@ public class AppController {
         this.appRepository = appRepository;
     }
 
+    /** Cadastrar na base de aplicativos */
+    @PostMapping("/servcad/aplicativos")
+    public AppEntity addApp(@RequestBody final AppEntity app) {
+        return appRepository.create(app.getName(), app.getMonthlyCost());
+    }
+
     /** Lista com todos os aplicativos cadastrados */
     @GetMapping("/servcad/aplicativos")
     public List<AppEntity> getApps() {
