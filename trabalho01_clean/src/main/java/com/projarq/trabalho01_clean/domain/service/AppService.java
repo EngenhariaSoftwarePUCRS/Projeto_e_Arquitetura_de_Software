@@ -17,7 +17,7 @@ public class AppService implements IAppRepository {
     }
 
     @Override
-    public AppEntity edit(Long id, String name, float monthlyCost) {
+    public AppEntity edit(Long id, AppEntity updatedAppEntity) {
         return null;
     }
 

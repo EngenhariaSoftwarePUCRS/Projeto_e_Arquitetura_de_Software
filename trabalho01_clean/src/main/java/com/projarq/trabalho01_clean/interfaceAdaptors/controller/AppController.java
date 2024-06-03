@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -27,6 +28,15 @@ public class AppController {
     @PostMapping("/servcad/aplicativos")
     public AppEntity addApp(@RequestBody final AppEntity app) {
         return appRepository.create(app.getName(), app.getMonthlyCost());
+    }
+
+    /** Editar a base de aplicativos */
+    @PutMapping("/servcad/aplicativos/{idAplicativo}")
+    public AppEntity editApp(
+        @PathVariable("idAplicativo") final Long appId,
+        @RequestBody final AppEntity app
+    ) {
+        return appRepository.edit(appId, app);
     }
 
     /** Lista com todos os aplicativos cadastrados */
