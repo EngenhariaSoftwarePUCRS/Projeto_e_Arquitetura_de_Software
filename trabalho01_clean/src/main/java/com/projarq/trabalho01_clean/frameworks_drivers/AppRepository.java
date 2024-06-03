@@ -1,4 +1,4 @@
-package com.projarq.trabalho01_clean.interfaceAdaptors.repository;
+package com.projarq.trabalho01_clean.frameworks_drivers;
 
 import java.util.List;
 
@@ -25,7 +25,7 @@ public class AppRepository implements IAppRepository {
     }
 
     @Override
-    public AppEntity edit(Long id, String name, float monthlyCost) {
+    public AppEntity edit(Long id, AppEntity app) {
         return null;
     }
 

@@ -1,4 +1,4 @@
-package com.projarq.trabalho01_clean.interfaceAdaptors.repository;
+package com.projarq.trabalho01_clean.frameworks_drivers;
 
 import java.util.List;
 
