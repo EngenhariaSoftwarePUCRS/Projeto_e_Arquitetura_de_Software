@@ -1,0 +1,11 @@
+package com.projarq.trabalho01_clean.interfaceAdaptors.useCases;
+
+import java.util.List;
+
+import com.projarq.trabalho01_clean.domain.entity.ClientEntity;
+
+public interface IClientUseCases {
+    ClientEntity create(Long id, String name, String email);
+    List<ClientEntity> getAllClients();
+    ClientEntity edit(Long id, String name, String email);
+}

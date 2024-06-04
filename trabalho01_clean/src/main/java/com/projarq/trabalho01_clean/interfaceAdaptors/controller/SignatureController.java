@@ -12,23 +12,23 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.projarq.trabalho01_clean.interfaceAdaptors.DTOs.Signature.SignatureRequestDTO;
 import com.projarq.trabalho01_clean.interfaceAdaptors.DTOs.Signature.SignatureType;
-import com.projarq.trabalho01_clean.interfaceAdaptors.repository.ISignatureRepository;
+import com.projarq.trabalho01_clean.interfaceAdaptors.useCases.ISignatureUseCases;
 import com.projarq.trabalho01_clean.interfaceAdaptors.DTOs.Signature.SignatureResponse;
 
 @CrossOrigin(origins = "*")
 @RestController
 public class SignatureController {
-    private ISignatureRepository signatureRepository;
+    private ISignatureUseCases signatureService;
 
     @Autowired
-    public SignatureController(ISignatureRepository signatureRepository) {
-        this.signatureRepository = signatureRepository;
+    public SignatureController(ISignatureUseCases signatureService) {
+        this.signatureService = signatureService;
     }
 
     /** Cria uma assinatura */
     @PostMapping("/servcad/assinaturas")
     public SignatureResponse addSignature(@RequestBody final SignatureRequestDTO signatureDTO) {
-        return signatureRepository.addSignature(signatureDTO.getClientId(), signatureDTO.getAppId());
+        return signatureService.addSignature(signatureDTO.getClientId(), signatureDTO.getAppId());
     }
 
     /** Retorna a lista com todas as assinaturas confirme o tipo */
@@ -38,7 +38,7 @@ public class SignatureController {
         @PathVariable(value="tipo") String type
     ) {
         SignatureType signatureType = new SignatureType(type);
-        return signatureRepository.getSignatureByType(appId, signatureType);
+        return signatureService.getSignatureByType(appId, signatureType);
     }
 
     /** Retorna a lista das assinaturas do cliente informado */
@@ -46,7 +46,7 @@ public class SignatureController {
     public List<SignatureResponse> getClientSignatures(
         @PathVariable(value="codcli") final Long clientId
     ) {
-        return signatureRepository.getClientSignatures(clientId);
+        return signatureService.getClientSignatures(clientId);
     }
 
     /** Retorna a lista de assinaturas de um aplicativo */
@@ -54,7 +54,7 @@ public class SignatureController {
     public List<SignatureResponse> getAppSignatures(
         @PathVariable(value="codapp") final Long appId
     ) {
-        return signatureRepository.getAppSignatures(appId);
+        return signatureService.getAppSignatures(appId);
     }
 
     /** Retorna se a assinatura questionada permanece ativa */
@@ -62,6 +62,6 @@ public class SignatureController {
     public boolean isSignatureActive(
         @PathVariable(value="codass") final Long signatureId
     ) {
-        return signatureRepository.isSignatureActive(signatureId);
+        return signatureService.isSignatureActive(signatureId);
     }
 }

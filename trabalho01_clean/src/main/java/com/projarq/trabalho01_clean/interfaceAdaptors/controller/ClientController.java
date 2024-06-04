@@ -8,21 +8,21 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.projarq.trabalho01_clean.domain.entity.ClientEntity;
-import com.projarq.trabalho01_clean.interfaceAdaptors.repository.IClientRepository;
+import com.projarq.trabalho01_clean.interfaceAdaptors.useCases.IClientUseCases;
 
 @CrossOrigin(origins = "*")
 @RestController
 public class ClientController {
-    private IClientRepository clientRepository;
+    private IClientUseCases clientService;
 
     @Autowired
-    public ClientController(IClientRepository clientRepository) {
-        this.clientRepository = clientRepository;
+    public ClientController(IClientUseCases clientService) {
+        this.clientService = clientService;
     }
 
     /** Lista com todos os clientes cadastrados */
     @GetMapping("/servcad/clientes")
     public List<ClientEntity> getClients() {
-        return clientRepository.getAllClients();
+        return clientService.getAllClients();
     }
 }

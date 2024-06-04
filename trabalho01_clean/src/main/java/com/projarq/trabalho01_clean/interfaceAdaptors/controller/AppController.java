@@ -12,22 +12,22 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.projarq.trabalho01_clean.domain.entity.AppEntity;
-import com.projarq.trabalho01_clean.interfaceAdaptors.repository.IAppRepository;
+import com.projarq.trabalho01_clean.interfaceAdaptors.useCases.IAppUseCases;
 
 @CrossOrigin(origins = "*")
 @RestController
 public class AppController {
-    private IAppRepository appRepository;
+    private IAppUseCases appService;
 
     @Autowired
-    public AppController(IAppRepository appRepository) {
-        this.appRepository = appRepository;
+    public AppController(IAppUseCases appService) {
+        this.appService = appService;
     }
 
     /** Cadastrar na base de aplicativos */
     @PostMapping("/servcad/aplicativos")
     public AppEntity addApp(@RequestBody final AppEntity app) {
-        return appRepository.create(app.getName(), app.getMonthlyCost());
+        return appService.create(app.getName(), app.getMonthlyCost());
     }
 
     /** Editar a base de aplicativos */
@@ -36,13 +36,13 @@ public class AppController {
         @PathVariable("idAplicativo") final Long appId,
         @RequestBody final AppEntity app
     ) {
-        return appRepository.edit(appId, app);
+        return appService.edit(appId, app);
     }
 
     /** Lista com todos os aplicativos cadastrados */
     @GetMapping("/servcad/aplicativos")
     public List<AppEntity> getApps() {
-        return appRepository.getAll();
+        return appService.getAll();
     }
 
     /** Atualizar o custo mensal do aplicativo */
@@ -51,6 +51,6 @@ public class AppController {
         @PathVariable("idAplicativo") final Long appId,
         @RequestBody final float monthlyCost
     ) {
-        return appRepository.updateMonthlyCost(appId, monthlyCost);
+        return appService.updateMonthlyCost(appId, monthlyCost);
     }
 }

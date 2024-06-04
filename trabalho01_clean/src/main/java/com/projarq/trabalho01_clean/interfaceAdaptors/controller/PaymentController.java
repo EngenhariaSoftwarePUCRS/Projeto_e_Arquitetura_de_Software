@@ -10,16 +10,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.projarq.trabalho01_clean.interfaceAdaptors.DTOs.Payment.PaymentRequestDTO;
 import com.projarq.trabalho01_clean.interfaceAdaptors.DTOs.Payment.PaymentResponseDTO;
-import com.projarq.trabalho01_clean.interfaceAdaptors.repository.IPaymentRepository;
+import com.projarq.trabalho01_clean.interfaceAdaptors.useCases.IPaymentUseCases;
 
 @CrossOrigin(origins = "*")
 @RestController
 public class PaymentController {
-    private IPaymentRepository paymentRepository;
+    private IPaymentUseCases paymentService;
 
     @Autowired
-    public PaymentController(IPaymentRepository paymentRepository) {
-        this.paymentRepository = paymentRepository;
+    public PaymentController(IPaymentUseCases paymentService) {
+        this.paymentService = paymentService;
     }
 
     /** Solicita o registro de um pagamento */
@@ -31,7 +31,7 @@ public class PaymentController {
             paymentDTO.getMonth() - 1,
             paymentDTO.getDay()
         );
-        return paymentRepository.create(
+        return paymentService.create(
             paymentDate,
             paymentDTO.getSignatureId(),
             paymentDTO.getSignaturePrice()
