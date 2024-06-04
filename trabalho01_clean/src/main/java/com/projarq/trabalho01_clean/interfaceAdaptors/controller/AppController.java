@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.projarq.trabalho01_clean.domain.entity.AppEntity;
+import com.projarq.trabalho01_clean.interfaceAdaptors.DTOs.App.CreateAppDTO;
+import com.projarq.trabalho01_clean.interfaceAdaptors.DTOs.App.EditAppDTO;
 import com.projarq.trabalho01_clean.interfaceAdaptors.useCases.IAppUseCases;
 
 @CrossOrigin(origins = "*")
@@ -26,15 +28,17 @@ public class AppController {
 
     /** Cadastrar na base de aplicativos */
     @PostMapping("/servcad/aplicativos")
-    public AppEntity addApp(@RequestBody final AppEntity app) {
-        return appService.create(app.getName(), app.getMonthlyCost());
+    public AppEntity addApp(@RequestBody final CreateAppDTO app) {
+        String appName = app.getName();
+        float appMonthlyCost = app.getMonthlyCost();
+        return appService.create(appName, appMonthlyCost);
     }
 
     /** Editar a base de aplicativos */
     @PutMapping("/servcad/aplicativos/{idAplicativo}")
     public AppEntity editApp(
         @PathVariable("idAplicativo") final Long appId,
-        @RequestBody final AppEntity app
+        @RequestBody final EditAppDTO app
     ) {
         return appService.edit(appId, app);
     }

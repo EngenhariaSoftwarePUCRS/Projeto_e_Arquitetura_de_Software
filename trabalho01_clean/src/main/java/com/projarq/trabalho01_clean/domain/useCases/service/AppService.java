@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.projarq.trabalho01_clean.domain.entity.AppEntity;
 import com.projarq.trabalho01_clean.domain.entity.ClientEntity;
+import com.projarq.trabalho01_clean.interfaceAdaptors.DTOs.App.EditAppDTO;
 import com.projarq.trabalho01_clean.interfaceAdaptors.repository.IAppRepository;
 import com.projarq.trabalho01_clean.interfaceAdaptors.useCases.IAppUseCases;
 
@@ -25,7 +26,7 @@ public class AppService implements IAppUseCases {
     }
 
     @Override
-    public AppEntity edit(Long id, AppEntity updatedAppEntity) {
+    public AppEntity edit(Long id, EditAppDTO updatedAppEntity) {
         return appRepository.edit(id, updatedAppEntity);
     }
 
