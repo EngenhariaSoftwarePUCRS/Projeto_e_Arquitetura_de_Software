@@ -19,17 +19,46 @@ public class ClientDatabase implements IClientRepository {
     }
 
     @Override
-    public ClientEntity create(Long id, String name, String email) {
-        return null;
+    public ClientEntity create(String name, String email) {
+        String sql = "INSERT INTO clients (name, email) VALUES (?, ?)";
+        int clientDBId = database.update(sql, name, email);
+        Long clientId = Long.valueOf(clientDBId);
+        return new ClientEntity(clientId, name, email);
     }
 
     @Override
     public ClientEntity edit(Long id, String name, String email) {
-        return null;
+        String sql = "UPDATE clients SET";
+        if (name != null) {
+            sql += " name = '" + name + "',";
+        }
+        if (email != null) {
+            sql += " email = '" + email + "',";
+        }
+        // Remove a última vírgula
+        sql = sql.substring(0, sql.length() - 1);
+        sql += " WHERE id = " + id;
+        int clientDBId = database.update(sql);
+        Long clientId = Long.valueOf(clientDBId);
+        return getClient(clientId);
     }
 
     @Override
     public List<ClientEntity> getAllClients() {
-        return null;
+        String sql = "SELECT * FROM clients";
+        return database.query(sql, (rs, rowNum) -> new ClientEntity(
+            rs.getLong("id"),
+            rs.getString("name"),
+            rs.getString("email")
+        ));
+    }
+
+    private ClientEntity getClient(Long clientId) {
+        String sql = "SELECT * FROM clients WHERE id = ?";
+        return database.queryForObject(sql, (rs, rowNum) -> new ClientEntity(
+            rs.getLong("id"),
+            rs.getString("name"),
+            rs.getString("email")
+        ), clientId);
     }
 }

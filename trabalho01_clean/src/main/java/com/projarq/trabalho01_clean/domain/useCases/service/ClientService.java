@@ -19,8 +19,8 @@ public class ClientService implements IClientUseCases {
     }
 
     @Override
-    public ClientEntity create(Long id, String name, String email) {
-        return clientRepository.create(id, name, email);
+    public ClientEntity create(String name, String email) {
+        return clientRepository.create(name, email);
     }
 
     @Override

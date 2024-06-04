@@ -5,7 +5,7 @@ import java.util.List;
 import com.projarq.trabalho01_clean.domain.entity.ClientEntity;
 
 public interface IClientRepository{
-    ClientEntity create(Long id, String name, String email);
+    ClientEntity create(String name, String email);
     List<ClientEntity> getAllClients();
-    ClientEntity edit(Long id, String name, String email); //Fazer isso opcional!!!
+    ClientEntity edit(Long id, String name, String email);
 }
