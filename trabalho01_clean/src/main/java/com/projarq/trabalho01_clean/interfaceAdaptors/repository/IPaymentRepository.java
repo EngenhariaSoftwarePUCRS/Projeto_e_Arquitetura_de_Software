@@ -1,4 +1,4 @@
-package com.projarq.trabalho01_clean.domain.repository;
+package com.projarq.trabalho01_clean.interfaceAdaptors.repository;
 
 import java.util.Date;
 import java.util.List;

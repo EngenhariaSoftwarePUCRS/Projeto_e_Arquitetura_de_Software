@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.projarq.trabalho01_clean.domain.repository.ISignatureRepository;
 import com.projarq.trabalho01_clean.interfaceAdaptors.DTOs.Signature.SignatureRequestDTO;
 import com.projarq.trabalho01_clean.interfaceAdaptors.DTOs.Signature.SignatureType;
+import com.projarq.trabalho01_clean.interfaceAdaptors.repository.ISignatureRepository;
 import com.projarq.trabalho01_clean.interfaceAdaptors.DTOs.Signature.SignatureResponse;
 
 @CrossOrigin(origins = "*")

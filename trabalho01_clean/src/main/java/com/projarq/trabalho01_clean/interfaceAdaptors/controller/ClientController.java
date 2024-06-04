@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.projarq.trabalho01_clean.domain.entity.ClientEntity;
-import com.projarq.trabalho01_clean.domain.repository.IClientRepository;
+import com.projarq.trabalho01_clean.interfaceAdaptors.repository.IClientRepository;
 
 @CrossOrigin(origins = "*")
 @RestController

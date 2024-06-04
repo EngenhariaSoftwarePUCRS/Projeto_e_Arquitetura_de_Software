@@ -1,4 +1,4 @@
-package com.projarq.trabalho01_clean.frameworks_drivers;
+package com.projarq.trabalho01_clean.frameworksDrivers;
 
 import java.util.List;
 
@@ -7,14 +7,14 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.projarq.trabalho01_clean.domain.entity.ClientEntity;
-import com.projarq.trabalho01_clean.domain.repository.IClientRepository;
+import com.projarq.trabalho01_clean.interfaceAdaptors.repository.IClientRepository;
 
 @Repository
-public class ClientRepository implements IClientRepository {
+public class ClientDatabase implements IClientRepository {
     private JdbcTemplate database;
 
     @Autowired
-    public ClientRepository(JdbcTemplate database) {
+    public ClientDatabase(JdbcTemplate database) {
         this.database = database;
     }
 

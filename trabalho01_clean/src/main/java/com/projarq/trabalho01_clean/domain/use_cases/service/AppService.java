@@ -1,23 +1,15 @@
-package com.projarq.trabalho01_clean.frameworks_drivers;
+package com.projarq.trabalho01_clean.domain.use_cases.service;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Repository;
+import org.springframework.context.annotation.Primary;
 
 import com.projarq.trabalho01_clean.domain.entity.AppEntity;
 import com.projarq.trabalho01_clean.domain.entity.ClientEntity;
-import com.projarq.trabalho01_clean.domain.repository.IAppRepository;
+import com.projarq.trabalho01_clean.interfaceAdaptors.repository.IAppRepository;
 
-@Repository
-public class AppRepository implements IAppRepository {
-    private JdbcTemplate database;
-
-    @Autowired
-    public AppRepository(JdbcTemplate database) {
-        this.database = database;
-    }
+@Primary
+public class AppService implements IAppRepository {
 
     @Override
     public AppEntity create(String name, float monthlyCost) {
@@ -25,7 +17,7 @@ public class AppRepository implements IAppRepository {
     }
 
     @Override
-    public AppEntity edit(Long id, AppEntity app) {
+    public AppEntity edit(Long id, AppEntity updatedAppEntity) {
         return null;
     }
 

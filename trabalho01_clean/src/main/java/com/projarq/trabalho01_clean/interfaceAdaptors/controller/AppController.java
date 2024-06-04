@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.projarq.trabalho01_clean.domain.entity.AppEntity;
-import com.projarq.trabalho01_clean.domain.repository.IAppRepository;
+import com.projarq.trabalho01_clean.interfaceAdaptors.repository.IAppRepository;
 
 @CrossOrigin(origins = "*")
 @RestController

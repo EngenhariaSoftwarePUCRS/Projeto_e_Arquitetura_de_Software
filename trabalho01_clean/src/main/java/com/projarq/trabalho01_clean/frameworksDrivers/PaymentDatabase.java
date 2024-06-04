@@ -1,4 +1,4 @@
-package com.projarq.trabalho01_clean.frameworks_drivers;
+package com.projarq.trabalho01_clean.frameworksDrivers;
 
 import java.util.List;
 
@@ -7,17 +7,17 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.projarq.trabalho01_clean.domain.entity.PaymentEntity;
-import com.projarq.trabalho01_clean.domain.repository.IPaymentRepository;
 import com.projarq.trabalho01_clean.interfaceAdaptors.DTOs.Payment.PaymentResponseDTO;
+import com.projarq.trabalho01_clean.interfaceAdaptors.repository.IPaymentRepository;
 
 import java.util.Date;
 
 @Repository
-public class PaymentRepository implements IPaymentRepository {
+public class PaymentDatabase implements IPaymentRepository {
     private JdbcTemplate database;
 
     @Autowired
-    public PaymentRepository(JdbcTemplate database) {
+    public PaymentDatabase(JdbcTemplate database) {
         this.database = database;
     }
 

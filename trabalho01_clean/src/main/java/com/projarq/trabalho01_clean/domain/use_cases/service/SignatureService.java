@@ -1,23 +1,15 @@
-package com.projarq.trabalho01_clean.frameworks_drivers;
+package com.projarq.trabalho01_clean.domain.use_cases.service;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Repository;
+import org.springframework.context.annotation.Primary;
 
-import com.projarq.trabalho01_clean.domain.repository.ISignatureRepository;
 import com.projarq.trabalho01_clean.interfaceAdaptors.DTOs.Signature.SignatureType;
+import com.projarq.trabalho01_clean.interfaceAdaptors.repository.ISignatureRepository;
 import com.projarq.trabalho01_clean.interfaceAdaptors.DTOs.Signature.SignatureResponse;
 
-@Repository
-public class SignatureRepository implements ISignatureRepository {
-    private JdbcTemplate database;
-
-    @Autowired
-    public SignatureRepository(JdbcTemplate database) {
-        this.database = database;
-    }
+@Primary
+public class SignatureService implements ISignatureRepository {
 
     @Override
     public SignatureResponse addSignature(Long clientId, Long appId) {
@@ -43,4 +35,5 @@ public class SignatureRepository implements ISignatureRepository {
     public boolean isSignatureActive(Long signatureId) {
         return false;
     }
+    
 }
