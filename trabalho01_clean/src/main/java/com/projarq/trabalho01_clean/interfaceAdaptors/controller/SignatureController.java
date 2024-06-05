@@ -14,9 +14,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.projarq.trabalho01_clean.interfaceAdaptors.DTOs.Signature.SignatureRequestDTO;
-import com.projarq.trabalho01_clean.interfaceAdaptors.DTOs.Signature.SignatureType;
+import com.projarq.trabalho01_clean.interfaceAdaptors.DTOs.Signature.SignatureTypeDTO;
 import com.projarq.trabalho01_clean.interfaceAdaptors.useCases.ISignatureUseCases;
 import com.projarq.trabalho01_clean.interfaceAdaptors.DTOs.Signature.SignatureResponse;
+import com.projarq.trabalho01_clean.interfaceAdaptors.DTOs.Signature.SignatureType;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -44,22 +45,39 @@ public class SignatureController {
         }
     }
 
+    @GetMapping("/servcad/assinaturas")
+    public List<SignatureResponse> getAllSignatures() {
+        List<SignatureResponse> signatures = signatureService.getAllSignatures();
+        return signatures;
+    }
+
     /** Retorna a lista com todas as assinaturas confirme o tipo */
     @GetMapping("/servcad/assinaturas/{tipo}")
-    public List<SignatureResponse> getSignatureByType(
+    public ResponseEntity<List<SignatureResponse>> getSignatureByType(
         @RequestBody final Long appId,
         @PathVariable(value="tipo") String type
     ) {
-        SignatureType signatureType = new SignatureType(type);
-        return signatureService.getSignatureByType(appId, signatureType);
+        SignatureTypeDTO signatureTypeValue = new SignatureTypeDTO(type);
+        if (!signatureTypeValue.isValid()) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        SignatureType signatureType = signatureTypeValue.getSignatureType();
+        List<SignatureResponse> signatures = signatureService.getSignatureByType(appId, signatureType);
+        return new ResponseEntity<>(signatures, HttpStatus.OK);
     }
 
     /** Retorna a lista das assinaturas do cliente informado */
     @GetMapping("/servcad/asscli/{codcli}")
-    public List<SignatureResponse> getClientSignatures(
+    public ResponseEntity<List<SignatureResponse>> getClientSignatures(
         @PathVariable(value="codcli") final Long clientId
     ) {
-        return signatureService.getClientSignatures(clientId);
+        List<SignatureResponse> clientSignatures;
+        try {
+            clientSignatures = signatureService.getClientSignatures(clientId);
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(clientSignatures, HttpStatus.OK);
     }
 
     /** Retorna a lista de assinaturas de um aplicativo */

@@ -8,7 +8,6 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.projarq.trabalho01_clean.interfaceAdaptors.DTOs.Signature.SignatureType;
 import com.projarq.trabalho01_clean.interfaceAdaptors.repository.ISignatureRepository;
 import com.projarq.trabalho01_clean.domain.entity.SignatureEntity;
 
@@ -27,6 +26,18 @@ public class SignatureDatabase implements ISignatureRepository {
         int signatureDBId = database.update(sql, clientId, appId, startDate);
         Long signatureId = Long.valueOf(signatureDBId);
         return getSignature(signatureId);
+    }
+
+    @Override
+    public List<SignatureEntity> getAllSignatures() {
+        String sql = "SELECT * FROM signatures";
+        return database.query(sql, (rs, rowNum) -> new SignatureEntity(
+            rs.getLong("id"),
+            rs.getLong("appId"),
+            rs.getLong("clientId"),
+            rs.getDate("startDate"),
+            rs.getDate("endDate")
+        ));
     }
 
     @Override
@@ -50,7 +61,7 @@ public class SignatureDatabase implements ISignatureRepository {
             rs.getLong("clientId"),
             rs.getDate("startDate"),
             rs.getDate("endDate")
-        ));
+        ), appId);
     }
 
     @Override
@@ -62,18 +73,23 @@ public class SignatureDatabase implements ISignatureRepository {
             rs.getLong("clientId"),
             rs.getDate("startDate"),
             rs.getDate("endDate")
-        ));
+        ), clientID);
     }
 
     @Override
-    public List<SignatureEntity> getSignatureByType(Long appId, SignatureType type) {
-        String sql = "SELECT * FROM signatures WHERE appId = ? AND type = ?";
+    public List<SignatureEntity> getSignatureByEndDate(Long appId, boolean endDateNull) {
+        String sql = "SELECT * FROM signatures WHERE appId = ? AND endDate IS ";
+        if (endDateNull) {
+            sql += "NULL";
+        } else {
+            sql += "NOT NULL";
+        }
         return database.query(sql, (rs, rowNum) -> new SignatureEntity(
             rs.getLong("id"),
             rs.getLong("appId"),
             rs.getLong("clientId"),
             rs.getDate("startDate"),
             rs.getDate("endDate")
-        ), appId, type);
+        ), appId);
     }
 }

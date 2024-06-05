@@ -9,9 +9,10 @@ import com.projarq.trabalho01_clean.interfaceAdaptors.DTOs.Signature.SignatureRe
 
 public interface ISignatureUseCases {
     SignatureResponse addSignature (Long clientId, Long appId) throws IllegalArgumentException;
+    List<SignatureResponse> getAllSignatures();
     SignatureResponse getSignature(Long signatureId) throws EmptyResultDataAccessException;
-    List<SignatureResponse> getClientSignatures(Long clientID);
-    List<SignatureResponse> getSignatureByType(Long appId, SignatureType type);
-    List<SignatureResponse> getAppSignatures(Long appId);
-    boolean isSignatureActive(Long signatureId);
+    List<SignatureResponse> getClientSignatures(Long clientID) throws IllegalArgumentException;
+    List<SignatureResponse> getSignatureByType(Long appId, SignatureType type) throws IllegalArgumentException;
+    List<SignatureResponse> getAppSignatures(Long appId) throws IllegalArgumentException;
+    boolean isSignatureActive(Long signatureId) throws EmptyResultDataAccessException;
 }
