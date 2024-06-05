@@ -36,6 +36,11 @@ public class AppService implements IAppUseCases {
     }
 
     @Override
+    public AppEntity getApp(Long appId) {
+        return appRepository.getApp(appId);
+    }
+
+    @Override
     public List<ClientEntity> getAllClients(Long appId) {
         return appRepository.getAllClients(appId);
     }

@@ -3,6 +3,7 @@ package com.projarq.trabalho01_clean.frameworksDrivers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -55,13 +56,18 @@ public class AppDatabase implements IAppRepository {
         ));
     }
 
-    private AppEntity getApp(Long appId) {
+    @Override
+    public AppEntity getApp(Long appId) {
         String sql = "SELECT * FROM apps WHERE id = ?";
-        return database.queryForObject(sql, (rs, rowNum) -> new AppEntity(
-            rs.getLong("id"),
-            rs.getString("name"),
-            rs.getFloat("monthlyCost")
-        ), appId);
+        try {
+            return database.queryForObject(sql, (rs, rowNum) -> new AppEntity(
+                rs.getLong("id"),
+                rs.getString("name"),
+                rs.getFloat("monthlyCost")
+            ), appId);
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
     }
 
     @Override

@@ -9,6 +9,7 @@ import com.projarq.trabalho01_clean.interfaceAdaptors.DTOs.App.EditAppDTO;
 public interface IAppUseCases {
     AppEntity create(String name, float monthlyCost);
     List<AppEntity> getAll();
+    AppEntity getApp(Long appId);
     List<ClientEntity> getAllClients(Long appId);
     AppEntity edit(Long id, EditAppDTO updatedAppEntity);
     AppEntity updateMonthlyCost(Long appId, float monthlyCost);
