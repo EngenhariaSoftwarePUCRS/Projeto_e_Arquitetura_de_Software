@@ -140,15 +140,19 @@ public class SignatureService implements ISignatureUseCases {
     @Override
     public List<SignatureResponse> getSignatureByType(SignatureType type) {
         List<SignatureEntity> signatures = null;
-        Boolean isEndDateNull = null;
-        if (type == SignatureType.TODAS) {
-            isEndDateNull = null;
-        } else if (type == SignatureType.ATIVAS) {
-            isEndDateNull = true;
+        String comparator = null;
+        Date comparingDate = null;
+        if (type == SignatureType.ATIVAS) {
+            comparator = ">=";
+            comparingDate = new Date();
+            signatures = signatureRepository.getSignatureByEndDate(comparator, comparingDate);
         } else if (type == SignatureType.CANCELADAS) {
-            isEndDateNull = false;
+            comparator = "<";
+            comparingDate = new Date();
+            signatures = signatureRepository.getSignatureByEndDate(comparator, comparingDate);
+        } else {
+            signatures = signatureRepository.getAllSignatures();
         }
-        signatures = signatureRepository.getSignatureByEndDate(isEndDateNull);
         return signatures.stream().map(signature -> {
             return new SignatureResponse(
                 signature.getId(),
@@ -169,7 +173,8 @@ public class SignatureService implements ISignatureUseCases {
             throw new IllegalArgumentException("Signature not found");
         }
         Date now = new Date();
-        return signature.getEndDate().after(now);
+        Date endDate = signature.getEndDate();
+        return endDate.after(now) || endDate.equals(now);
     }
 
     @Override

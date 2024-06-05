@@ -77,18 +77,19 @@ public class SignatureDatabase implements ISignatureRepository {
     }
 
     @Override
-    public List<SignatureEntity> getSignatureByEndDate(Boolean isEndDateNull) {
-        String sql = "SELECT * FROM signatures";
-        if (isEndDateNull != null) {
-            sql += " WHERE endDate IS " + (isEndDateNull ? "NULL" : "NOT NULL");
-        }
+    /**
+     * @param comparator ">", "<", "=", "<=", ">="
+     * @param comparingDate Date to compare with or null to do no comparissons
+     */
+    public List<SignatureEntity> getSignatureByEndDate(String comparator, Date comparingDate) {
+        String sql = "SELECT * FROM signatures WHERE endDate " + comparator + " ?";
         return database.query(sql, (rs, rowNum) -> new SignatureEntity(
             rs.getLong("id"),
             rs.getLong("appId"),
             rs.getLong("clientId"),
             rs.getDate("startDate"),
             rs.getDate("endDate")
-        ));
+        ), comparingDate);
     }
 
     @Override

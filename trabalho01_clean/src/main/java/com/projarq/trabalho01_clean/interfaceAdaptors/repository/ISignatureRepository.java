@@ -10,7 +10,7 @@ public interface ISignatureRepository {
     List<SignatureEntity> getAllSignatures();
     SignatureEntity getSignature(Long signatureId);
     List<SignatureEntity> getClientSignatures(Long clientID);
-    List<SignatureEntity> getSignatureByEndDate(Boolean isEndDateNull);
+    List<SignatureEntity> getSignatureByEndDate(String comparator, Date comparingDate);
     List<SignatureEntity> getAppSignatures(Long appId);
     void updateSignature(Long signatureId, Date endDate);
 }
