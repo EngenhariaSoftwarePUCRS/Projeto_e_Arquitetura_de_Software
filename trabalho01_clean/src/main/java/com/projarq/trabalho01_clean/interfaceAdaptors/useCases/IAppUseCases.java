@@ -12,7 +12,7 @@ public interface IAppUseCases {
     AppEntity create(String name, float monthlyCost);
     List<AppEntity> getAll();
     AppEntity getApp(Long appId) throws EmptyResultDataAccessException;
-    List<ClientEntity> getAllClients(Long appId);
-    AppEntity edit(Long id, EditAppDTO updatedAppEntity);
-    AppEntity updateMonthlyCost(Long appId, float monthlyCost);
+    List<ClientEntity> getAllClients(Long appId) throws IllegalArgumentException;
+    AppEntity edit(Long id, EditAppDTO updatedAppEntity) throws IllegalArgumentException;
+    AppEntity updateMonthlyCost(Long appId, float monthlyCost) throws IllegalArgumentException;
 }

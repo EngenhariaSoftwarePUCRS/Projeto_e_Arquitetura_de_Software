@@ -27,11 +27,6 @@ public class AppService implements IAppUseCases {
     }
 
     @Override
-    public AppEntity edit(Long id, EditAppDTO updatedAppEntity) {
-        return appRepository.edit(id, updatedAppEntity);
-    }
-
-    @Override
     public List<AppEntity> getAll() {
         return appRepository.getAll();
     }
@@ -42,12 +37,17 @@ public class AppService implements IAppUseCases {
     }
 
     @Override
-    public List<ClientEntity> getAllClients(Long appId) {
+    public List<ClientEntity> getAllClients(Long appId) throws IllegalArgumentException {
         return appRepository.getAllClients(appId);
     }
 
     @Override
-    public AppEntity updateMonthlyCost(Long appId, float monthlyCost) {
+    public AppEntity edit(Long id, EditAppDTO updatedAppEntity) throws IllegalArgumentException {
+        return appRepository.edit(id, updatedAppEntity);
+    }
+
+    @Override
+    public AppEntity updateMonthlyCost(Long appId, float monthlyCost) throws IllegalArgumentException {
         return appRepository.updateMonthlyCost(appId, monthlyCost);
     }
 }
