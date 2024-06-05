@@ -4,9 +4,7 @@ import lombok.Data;
 
 @Data
 public class PaymentRequestDTO {
-    private int day;
-    private int month;
-    private int year;
     private Long signatureId;
-    private double signaturePrice;
+    private float payedValue;
+    private String promotion;
 }

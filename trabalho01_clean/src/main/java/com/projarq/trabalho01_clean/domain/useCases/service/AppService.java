@@ -3,6 +3,7 @@ package com.projarq.trabalho01_clean.domain.useCases.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.projarq.trabalho01_clean.domain.entity.AppEntity;
@@ -36,7 +37,7 @@ public class AppService implements IAppUseCases {
     }
 
     @Override
-    public AppEntity getApp(Long appId) {
+    public AppEntity getApp(Long appId) throws EmptyResultDataAccessException {
         return appRepository.getApp(appId);
     }
 

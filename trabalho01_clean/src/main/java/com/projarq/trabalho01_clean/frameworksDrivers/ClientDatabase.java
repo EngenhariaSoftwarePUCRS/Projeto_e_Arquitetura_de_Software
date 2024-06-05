@@ -57,14 +57,10 @@ public class ClientDatabase implements IClientRepository {
     @Override
     public ClientEntity getClient(Long clientId) {
         String sql = "SELECT * FROM clients WHERE id = ?";
-        try {
-            return database.queryForObject(sql, (rs, rowNum) -> new ClientEntity(
-                rs.getLong("id"),
-                rs.getString("name"),
-                rs.getString("email")
-            ), clientId);
-        } catch (EmptyResultDataAccessException e) {
-            return null;
-        }
+        return database.queryForObject(sql, (rs, rowNum) -> new ClientEntity(
+            rs.getLong("id"),
+            rs.getString("name"),
+            rs.getString("email")
+        ), clientId);
     }
 }

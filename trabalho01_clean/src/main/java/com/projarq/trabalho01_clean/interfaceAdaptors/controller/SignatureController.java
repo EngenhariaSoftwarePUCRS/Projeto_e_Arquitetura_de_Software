@@ -3,6 +3,9 @@ package com.projarq.trabalho01_clean.interfaceAdaptors.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,8 +30,18 @@ public class SignatureController {
 
     /** Cria uma assinatura */
     @PostMapping("/servcad/assinaturas")
-    public SignatureResponse addSignature(@RequestBody final SignatureRequestDTO signatureDTO) {
-        return signatureService.addSignature(signatureDTO.getClientId(), signatureDTO.getAppId());
+    public ResponseEntity<SignatureResponse> addSignature(@RequestBody final SignatureRequestDTO signatureDTO) {
+        Long clientId = signatureDTO.getClientId();
+        Long appId = signatureDTO.getAppId();
+        try {
+            SignatureResponse signatureResponse = signatureService.addSignature(clientId, appId);
+            return new ResponseEntity<>(
+                signatureResponse,
+                HttpStatus.CREATED
+            );
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 
     /** Retorna a lista com todas as assinaturas confirme o tipo */

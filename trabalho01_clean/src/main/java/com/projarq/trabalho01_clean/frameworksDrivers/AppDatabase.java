@@ -59,15 +59,11 @@ public class AppDatabase implements IAppRepository {
     @Override
     public AppEntity getApp(Long appId) {
         String sql = "SELECT * FROM apps WHERE id = ?";
-        try {
-            return database.queryForObject(sql, (rs, rowNum) -> new AppEntity(
-                rs.getLong("id"),
-                rs.getString("name"),
-                rs.getFloat("monthlyCost")
-            ), appId);
-        } catch (EmptyResultDataAccessException e) {
-            return null;
-        }
+        return database.queryForObject(sql, (rs, rowNum) -> new AppEntity(
+            rs.getLong("id"),
+            rs.getString("name"),
+            rs.getFloat("monthlyCost")
+        ), appId);
     }
 
     @Override

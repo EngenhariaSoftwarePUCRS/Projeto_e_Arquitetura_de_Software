@@ -1,20 +1,22 @@
 package com.projarq.trabalho01_clean.domain.entity;
 
-import java.time.LocalDate;
+import java.util.Date;
 
-import com.projarq.trabalho01_clean.domain.entity.AppEntity;
-import com.projarq.trabalho01_clean.domain.entity.ClientEntity;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
+@Data
+@AllArgsConstructor
 public class SignatureEntity {
 
     //Código da assinatura
     private Long id;
     //Aplicativo de que trata a assinatura
-    private AppEntity app;
+    private Long appId;
     //Cliente de que trata a assinatura
-    private ClientEntity client;
+    private Long clientId;
     //Início da vigência da assinatura
-    private LocalDate startDate;
+    private Date startDate;
     //Fim da vigência da assinatura
-    private LocalDate endDate;
+    private Date endDate;
 }

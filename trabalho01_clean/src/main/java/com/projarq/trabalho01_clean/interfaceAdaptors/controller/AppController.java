@@ -3,6 +3,9 @@ package com.projarq.trabalho01_clean.interfaceAdaptors.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -47,8 +50,13 @@ public class AppController {
 
     /** Lista com todos os aplicativos cadastrados */
     @GetMapping()
-    public List<AppEntity> getApps() {
-        return appService.getAll();
+    public ResponseEntity<List<AppEntity>> getApps() throws EmptyResultDataAccessException {
+        try {
+            List<AppEntity> apps = appService.getAll();
+            return new ResponseEntity<>(apps, HttpStatus.OK);
+        } catch (EmptyResultDataAccessException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     /** Atualizar o custo mensal do aplicativo */

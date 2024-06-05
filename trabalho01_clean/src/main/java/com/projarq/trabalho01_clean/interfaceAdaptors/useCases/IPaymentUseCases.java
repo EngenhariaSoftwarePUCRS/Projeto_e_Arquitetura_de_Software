@@ -7,7 +7,6 @@ import com.projarq.trabalho01_clean.domain.entity.PaymentEntity;
 import com.projarq.trabalho01_clean.interfaceAdaptors.DTOs.Payment.PaymentResponseDTO;
 
 public interface IPaymentUseCases {
-    PaymentResponseDTO create(Date paymentDate, Long signatureId, double signaturePrice);
+    PaymentResponseDTO create(Long signatureId, float payedValue, Date paymentDate, String promotion) throws IllegalArgumentException;
     List<PaymentEntity> getAll();
-    PaymentEntity edit(Long id, String name, float monthlyCost); //Fazer isso opcional!!!
 }
