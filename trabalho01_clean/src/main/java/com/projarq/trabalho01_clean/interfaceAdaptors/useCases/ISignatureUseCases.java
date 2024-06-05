@@ -12,7 +12,8 @@ public interface ISignatureUseCases {
     List<SignatureResponse> getAllSignatures();
     SignatureResponse getSignature(Long signatureId) throws EmptyResultDataAccessException;
     List<SignatureResponse> getClientSignatures(Long clientID) throws IllegalArgumentException;
-    List<SignatureResponse> getSignatureByType(Long appId, SignatureType type) throws IllegalArgumentException;
+    List<SignatureResponse> getSignatureByType(SignatureType type);
     List<SignatureResponse> getAppSignatures(Long appId) throws IllegalArgumentException;
     boolean isSignatureActive(Long signatureId) throws EmptyResultDataAccessException;
+    void cancelSignature(Long signatureId) throws EmptyResultDataAccessException;
 }

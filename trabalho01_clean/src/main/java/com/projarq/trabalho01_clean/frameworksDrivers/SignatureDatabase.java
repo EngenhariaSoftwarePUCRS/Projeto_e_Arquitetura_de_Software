@@ -77,12 +77,10 @@ public class SignatureDatabase implements ISignatureRepository {
     }
 
     @Override
-    public List<SignatureEntity> getSignatureByEndDate(Long appId, boolean endDateNull) {
-        String sql = "SELECT * FROM signatures WHERE appId = ? AND endDate IS ";
-        if (endDateNull) {
-            sql += "NULL";
-        } else {
-            sql += "NOT NULL";
+    public List<SignatureEntity> getSignatureByEndDate(Boolean isEndDateNull) {
+        String sql = "SELECT * FROM signatures";
+        if (isEndDateNull != null) {
+            sql += " WHERE endDate IS " + (isEndDateNull ? "NULL" : "NOT NULL");
         }
         return database.query(sql, (rs, rowNum) -> new SignatureEntity(
             rs.getLong("id"),
@@ -90,6 +88,12 @@ public class SignatureDatabase implements ISignatureRepository {
             rs.getLong("clientId"),
             rs.getDate("startDate"),
             rs.getDate("endDate")
-        ), appId);
+        ));
+    }
+
+    @Override
+    public void cancelSignature(Long signatureId, Date endDate) {
+        String sql = "UPDATE signatures SET endDate = ? WHERE id = ?";
+        database.update(sql, endDate, signatureId);
     }
 }

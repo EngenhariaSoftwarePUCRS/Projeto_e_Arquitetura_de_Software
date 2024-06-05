@@ -10,6 +10,7 @@ public interface ISignatureRepository {
     List<SignatureEntity> getAllSignatures();
     SignatureEntity getSignature(Long signatureId);
     List<SignatureEntity> getClientSignatures(Long clientID);
-    List<SignatureEntity> getSignatureByEndDate(Long appId, boolean endDateNull);
+    List<SignatureEntity> getSignatureByEndDate(Boolean isEndDateNull);
     List<SignatureEntity> getAppSignatures(Long appId);
+    void cancelSignature(Long signatureId, Date endDate);
 }

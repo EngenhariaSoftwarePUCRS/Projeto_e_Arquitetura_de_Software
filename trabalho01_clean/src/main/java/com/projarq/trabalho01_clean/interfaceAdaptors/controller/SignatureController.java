@@ -3,10 +3,10 @@ package com.projarq.trabalho01_clean.interfaceAdaptors.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -54,7 +54,6 @@ public class SignatureController {
     /** Retorna a lista com todas as assinaturas confirme o tipo */
     @GetMapping("/servcad/assinaturas/{tipo}")
     public ResponseEntity<List<SignatureResponse>> getSignatureByType(
-        @RequestBody final Long appId,
         @PathVariable(value="tipo") String type
     ) {
         SignatureTypeDTO signatureTypeValue = new SignatureTypeDTO(type);
@@ -62,7 +61,7 @@ public class SignatureController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         SignatureType signatureType = signatureTypeValue.getSignatureType();
-        List<SignatureResponse> signatures = signatureService.getSignatureByType(appId, signatureType);
+        List<SignatureResponse> signatures = signatureService.getSignatureByType(signatureType);
         return new ResponseEntity<>(signatures, HttpStatus.OK);
     }
 
@@ -94,5 +93,17 @@ public class SignatureController {
         @PathVariable(value="codass") final Long signatureId
     ) {
         return signatureService.isSignatureActive(signatureId);
+    }
+
+    @DeleteMapping("/servcad/assinaturas/{codass}")
+    public ResponseEntity<Void> cancelSignature(
+        @PathVariable(value="codass") final Long signatureId
+    ) {
+        try {
+            signatureService.cancelSignature(signatureId);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 }

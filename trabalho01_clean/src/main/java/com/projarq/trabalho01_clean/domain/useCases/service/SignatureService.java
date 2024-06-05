@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
-import com.projarq.trabalho01_clean.interfaceAdaptors.DTOs.Signature.SignatureTypeDTO;
 import com.projarq.trabalho01_clean.interfaceAdaptors.repository.ISignatureRepository;
 import com.projarq.trabalho01_clean.interfaceAdaptors.useCases.IAppUseCases;
 import com.projarq.trabalho01_clean.interfaceAdaptors.useCases.IClientUseCases;
@@ -82,8 +81,13 @@ public class SignatureService implements ISignatureUseCases {
     }
 
     @Override
-    public SignatureResponse getSignature(Long signatureId) throws EmptyResultDataAccessException {
-        SignatureEntity signature = signatureRepository.getSignature(signatureId);
+    public SignatureResponse getSignature(Long signatureId) throws IllegalArgumentException {
+        SignatureEntity signature;
+        try {
+            signature = signatureRepository.getSignature(signatureId);
+        } catch (EmptyResultDataAccessException e) {
+            throw new IllegalArgumentException("Signature not found");
+        }
         return new SignatureResponse(
             signature.getId(),
             signature.getAppId(),
@@ -127,17 +131,17 @@ public class SignatureService implements ISignatureUseCases {
     }
 
     @Override
-    public List<SignatureResponse> getSignatureByType(Long appId, SignatureType type) {
+    public List<SignatureResponse> getSignatureByType(SignatureType type) {
         List<SignatureEntity> signatures = null;
-        boolean isEndDateNull = false;
+        Boolean isEndDateNull = null;
         if (type == SignatureType.TODAS) {
-            signatures = signatureRepository.getAppSignatures(appId);
+            isEndDateNull = null;
         } else if (type == SignatureType.ATIVAS) {
             isEndDateNull = true;
         } else if (type == SignatureType.CANCELADAS) {
             isEndDateNull = false;
         }
-        signatures = signatureRepository.getSignatureByEndDate(appId, isEndDateNull);
+        signatures = signatureRepository.getSignatureByEndDate(isEndDateNull);
         return signatures.stream().map(signature -> {
             return new SignatureResponse(
                 signature.getId(),
@@ -150,8 +154,22 @@ public class SignatureService implements ISignatureUseCases {
     }
 
     @Override
-    public boolean isSignatureActive(Long signatureId) {
-        SignatureEntity signature = signatureRepository.getSignature(signatureId);
+    public boolean isSignatureActive(Long signatureId) throws IllegalArgumentException {
+        SignatureEntity signature;
+        try {
+            signature = signatureRepository.getSignature(signatureId);
+        } catch (EmptyResultDataAccessException e) {
+            throw new IllegalArgumentException("Signature not found");
+        }
         return signature.getEndDate() == null;
+    }
+
+    @Override
+    public void cancelSignature(Long signatureId) throws IllegalArgumentException {
+        try {
+            signatureRepository.cancelSignature(signatureId, new Date());
+        } catch (EmptyResultDataAccessException e) {
+            throw new IllegalArgumentException("Signature not found");
+        }
     }
 }
