@@ -31,5 +31,10 @@ public class ClientService implements IClientUseCases {
     @Override
     public List<ClientEntity> getAllClients() {
         return clientRepository.getAllClients();
-    }   
+    }
+
+    @Override
+    public ClientEntity getClient(Long id) {
+        return clientRepository.getClient(id);
+    }
 }

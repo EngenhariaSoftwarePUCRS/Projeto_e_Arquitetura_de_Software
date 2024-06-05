@@ -3,6 +3,7 @@ package com.projarq.trabalho01_clean.frameworksDrivers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -53,12 +54,17 @@ public class ClientDatabase implements IClientRepository {
         ));
     }
 
-    private ClientEntity getClient(Long clientId) {
+    @Override
+    public ClientEntity getClient(Long clientId) {
         String sql = "SELECT * FROM clients WHERE id = ?";
-        return database.queryForObject(sql, (rs, rowNum) -> new ClientEntity(
-            rs.getLong("id"),
-            rs.getString("name"),
-            rs.getString("email")
-        ), clientId);
+        try {
+            return database.queryForObject(sql, (rs, rowNum) -> new ClientEntity(
+                rs.getLong("id"),
+                rs.getString("name"),
+                rs.getString("email")
+            ), clientId);
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
     }
 }
