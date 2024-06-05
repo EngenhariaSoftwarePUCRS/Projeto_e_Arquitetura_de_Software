@@ -10,5 +10,5 @@ public interface IClientUseCases {
     ClientEntity create(String name, String email);
     List<ClientEntity> getAllClients();
     ClientEntity getClient(Long id) throws EmptyResultDataAccessException;
-    ClientEntity edit(Long id, String name, String email);
+    ClientEntity edit(Long id, String name, String email) throws IllegalArgumentException;
 }
