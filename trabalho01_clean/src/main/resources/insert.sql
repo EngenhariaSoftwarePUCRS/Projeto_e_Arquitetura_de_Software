@@ -14,3 +14,9 @@ INSERT INTO clients (id, name, email) VALUES (93, 'Client 93', 'email93@domain.c
 INSERT INTO clients (id, name, email) VALUES (92, 'Client 92', 'email92@domain.com');
 INSERT INTO clients (id, name, email) VALUES (91, 'Client 91', 'email91@domain.com');
 INSERT INTO clients (id, name, email) VALUES (90, 'Client 90', 'email90@domain.com');
+
+INSERT INTO signatures (id, appId, clientId, startDate, endDate) VALUES (99, 99, 99, '2024-01-20', NULL);
+INSERT INTO signatures (id, appId, clientId, startDate, endDate) VALUES (98, 99, 98, '2024-02-01', NULL);
+INSERT INTO signatures (id, appId, clientId, startDate, endDate) VALUES (97, 97, 98, '2024-03-15', NULL);
+INSERT INTO signatures (id, appId, clientId, startDate, endDate) VALUES (96, 96, 99, '2024-05-06', NULL);
+INSERT INTO signatures (id, appId, clientId, startDate, endDate) VALUES (95, 95, 95, '2024-06-04', NULL);
