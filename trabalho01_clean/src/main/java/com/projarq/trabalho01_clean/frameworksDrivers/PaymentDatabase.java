@@ -27,16 +27,8 @@ public class PaymentDatabase implements IPaymentRepository {
         Date paymentDate,
         String promotion
     ) {
-        String sql = "INSERT INTO payments (signatureId, payedValue, paymentDate";
-        if (promotion != null) {
-            sql += ", promotion";
-        }
-        sql += ") VALUES (?, ?, ?";
-        if (promotion != null) {
-            sql += ", ?";
-        }
-        sql += ")";
-        int paymentDBId = database.update(sql, paymentDate, signatureId, payedValue);
+        String sql = "INSERT INTO payments (signatureId, payedValue, paymentDate, promotion) VALUES (?, ?, ?, ?)";
+        int paymentDBId = database.update(sql, signatureId, payedValue, paymentDate, promotion);
         Long paymentId = Long.valueOf(paymentDBId);
         return new PaymentEntity(paymentId, signatureId, payedValue, paymentDate);
     }

@@ -72,7 +72,7 @@ public class PaymentService implements IPaymentUseCases {
             return new PaymentResponseDTO(paymentDate, payedValue, PaymentStatus.VALOR_INCORRETO);
         }
 
-        if (promotion == null || promotion == "") {
+        if (promotion == "") {
             return new PaymentResponseDTO(paymentDate, payedValue, PaymentStatus.PROMOCAO_INVALIDA);
         }
 
