@@ -1,5 +1,6 @@
 package com.projarq.trabalho01_clean.interfaceAdaptors.useCases;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -15,5 +16,6 @@ public interface ISignatureUseCases {
     List<SignatureResponse> getSignatureByType(SignatureType type);
     List<SignatureResponse> getAppSignatures(Long appId) throws IllegalArgumentException;
     boolean isSignatureActive(Long signatureId) throws EmptyResultDataAccessException;
+    void updateSignature(Long signatureId, Date endDate) throws EmptyResultDataAccessException;
     void cancelSignature(Long signatureId) throws EmptyResultDataAccessException;
 }

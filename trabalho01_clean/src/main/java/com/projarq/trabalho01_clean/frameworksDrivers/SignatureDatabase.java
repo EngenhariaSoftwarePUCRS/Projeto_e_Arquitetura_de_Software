@@ -21,9 +21,9 @@ public class SignatureDatabase implements ISignatureRepository {
     }
 
     @Override
-    public SignatureEntity addSignature(Long clientId, Long appId, Date startDate) {
-        String sql = "INSERT INTO signatures (clientId, appId, startDate) VALUES (?, ?, ?)";
-        int signatureDBId = database.update(sql, clientId, appId, startDate);
+    public SignatureEntity addSignature(Long clientId, Long appId, Date startDate, Date endDate) {
+        String sql = "INSERT INTO signatures (clientId, appId, startDate, endDate) VALUES (?, ?, ?, ?)";
+        int signatureDBId = database.update(sql, clientId, appId, startDate, endDate);
         Long signatureId = Long.valueOf(signatureDBId);
         return getSignature(signatureId);
     }
@@ -92,7 +92,7 @@ public class SignatureDatabase implements ISignatureRepository {
     }
 
     @Override
-    public void cancelSignature(Long signatureId, Date endDate) {
+    public void updateSignature(Long signatureId, Date endDate) {
         String sql = "UPDATE signatures SET endDate = ? WHERE id = ?";
         database.update(sql, endDate, signatureId);
     }

@@ -37,7 +37,7 @@ public class PaymentDatabase implements IPaymentRepository {
     public List<PaymentEntity> getAll() {
         String sql = "SELECT * FROM payments";
         return database.query(sql, (rs, rowNum) -> {
-            Long paymentId = rs.getLong("paymentId");
+            Long paymentId = rs.getLong("id");
             Long signatureId = rs.getLong("signatureId");
             float payedValue = rs.getFloat("payedValue");
             Date paymentDate = rs.getDate("paymentDate");

@@ -1,5 +1,6 @@
 package com.projarq.trabalho01_clean.domain.useCases.service;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -56,13 +57,19 @@ public class SignatureService implements ISignatureUseCases {
             throw new IllegalArgumentException("App not found");
         }
 
-        SignatureEntity signature = signatureRepository.addSignature(clientId, appId, new Date());
+        Date startDate = new Date();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(startDate);
+        // Default = 30 days + 7 free days
+        calendar.add(Calendar.DATE, 30 + 7);
+        Date endDate = calendar.getTime();
+        SignatureEntity signature = signatureRepository.addSignature(clientId, appId, startDate, endDate);
         return new SignatureResponse(
             signature.getId(),
             signature.getAppId(),
             signature.getClientId(),
-            signature.getStartDate(),
-            signature.getEndDate()
+            startDate,
+            endDate
         );
     }
 
@@ -161,13 +168,24 @@ public class SignatureService implements ISignatureUseCases {
         } catch (EmptyResultDataAccessException e) {
             throw new IllegalArgumentException("Signature not found");
         }
-        return signature.getEndDate() == null;
+        Date now = new Date();
+        return signature.getEndDate().after(now);
+    }
+
+    @Override
+    public void updateSignature(Long signatureId, Date endDate) {
+        try {
+            // TODO: Check that endDate > startDate
+            signatureRepository.updateSignature(signatureId, endDate);
+        } catch (EmptyResultDataAccessException e) {
+            throw new IllegalArgumentException("Signature not found");
+        }
     }
 
     @Override
     public void cancelSignature(Long signatureId) throws IllegalArgumentException {
         try {
-            signatureRepository.cancelSignature(signatureId, new Date());
+            signatureRepository.updateSignature(signatureId, new Date());
         } catch (EmptyResultDataAccessException e) {
             throw new IllegalArgumentException("Signature not found");
         }

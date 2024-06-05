@@ -239,6 +239,23 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "getPayments",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/pagamentos",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"pagamentos"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -292,21 +309,9 @@
 				},
 				{
 					"name": "getSignatureByType",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "99",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
 							"raw": "{{base_url}}/servcad/assinaturas/:tipo",
 							"host": [
@@ -345,7 +350,7 @@
 							"variable": [
 								{
 									"key": "codcli",
-									"value": "99"
+									"value": "{{id}}"
 								}
 							]
 						}
@@ -389,6 +394,31 @@
 							],
 							"path": [
 								"assinvalida",
+								":codass"
+							],
+							"variable": [
+								{
+									"key": "codass",
+									"value": "{{id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "cancelSignature",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/servcad/assinaturas/:codass",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"servcad",
+								"assinaturas",
 								":codass"
 							],
 							"variable": [

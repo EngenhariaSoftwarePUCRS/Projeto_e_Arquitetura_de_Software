@@ -6,11 +6,11 @@ import java.util.List;
 import com.projarq.trabalho01_clean.domain.entity.SignatureEntity;
 
 public interface ISignatureRepository {
-    SignatureEntity addSignature (Long clientId, Long appId, Date startDate);
+    SignatureEntity addSignature (Long clientId, Long appId, Date startDate, Date endDate);
     List<SignatureEntity> getAllSignatures();
     SignatureEntity getSignature(Long signatureId);
     List<SignatureEntity> getClientSignatures(Long clientID);
     List<SignatureEntity> getSignatureByEndDate(Boolean isEndDateNull);
     List<SignatureEntity> getAppSignatures(Long appId);
-    void cancelSignature(Long signatureId, Date endDate);
+    void updateSignature(Long signatureId, Date endDate);
 }

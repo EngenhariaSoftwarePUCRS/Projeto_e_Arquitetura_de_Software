@@ -1,5 +1,6 @@
 package com.projarq.trabalho01_clean.domain.useCases.service;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -67,17 +68,25 @@ public class PaymentService implements IPaymentUseCases {
             return new PaymentResponseDTO(paymentDate, refoundValue, PaymentStatus.VALOR_INCORRETO);
         }
 
-        boolean isSignatureValid = signatureService.isSignatureActive(signatureId);
-        if (!isSignatureValid) {
-            return new PaymentResponseDTO(paymentDate, payedValue, PaymentStatus.VALOR_INCORRETO);
-        }
-
         if (promotion == "") {
             return new PaymentResponseDTO(paymentDate, payedValue, PaymentStatus.PROMOCAO_INVALIDA);
         }
 
+        Calendar calendar = Calendar.getInstance();
+        if (paymentDate.before(signature.getEndDate())) {
+            // Se o pagamento for dado dentro do período
+            calendar.setTime(signature.getEndDate());
+        } else {
+            // Se a assinatura já tiver sido cancelada
+            calendar.setTime(paymentDate);
+        }
+        // startTime + 30 Days
+        calendar.add(Calendar.DATE, 30);
+        Date endDate = calendar.getTime();
+        signatureService.updateSignature(signatureId, endDate);
+
         paymentRepository.create(signatureId, payedValue, paymentDate, promotion);
-        return new PaymentResponseDTO(paymentDate, payedValue, PaymentStatus.PAGAMENTO_OK);
+        return new PaymentResponseDTO(endDate, 0, PaymentStatus.PAGAMENTO_OK);
     }
 
     @Override
