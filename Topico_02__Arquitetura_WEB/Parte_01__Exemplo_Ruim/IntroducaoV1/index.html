@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sistema Academico</title>
+</head>
+<body>
+    <h1>Informações do estudante</h1>
+    <p>Entre a matricula do estudante:</p>
+    <input type="number" id="matriculaInformada">
+    <p>Selecione a opção desejada:</p>
+    <select id="opcaoDesejada" onchange="academico()">
+        <option value="nenhuma">Nenhuma</option>
+        <option value="frequencia">Frequencia</option>
+        <option value="notasParciais">Notas parciais</option>
+        <option value="mediaFinal">Media final</option>
+        <option value="aprovacao">Aprovacao</option>
+    </select>
+    <p id="resposta"></p>
+
+    <script>
+        function academico() {
+            // Carrega banco de dados
+            var poo = [];
+            var totHorasPoo = 60;
+            //        Nome,            nP1,nP2,nP3,faltas,exame
+            poo[0] = ["Carlos Borba",   10,  8,  7,     5,   -1];
+            poo[1] = ["Silvia Almeida",  6,  8,  7,     2,   -1];
+            poo[2] = ["Mariana Tomaz",   7,  9,  5,     0,   -1];
+            poo[3] = ["Juan Dornelles",  6,  6,  5,     7,    7];
+            poo[4] = ["Mario Castilhos", 3, 10,  7,     1,    6];
+            // Variaveis da função
+            var matriculaInformada = document.getElementById("matriculaInformada").value;
+            var selectElement = document.getElementById("opcaoDesejada");
+            var opcaoDesejada = selectElement.options[selectElement.selectedIndex].value;
+            var textoOpcaoDesejada = selectElement.options[selectElement.selectedIndex].text;
+            var resposta = "";
+            if (matriculaInformada < 1000 || matriculaInformada > 1004){
+                document.getElementById("resposta").innerHTML = "Matricula invalida";
+                return;
+            }
+            var matricula = matriculaInformada - 1000;
+            switch(opcaoDesejada){
+                case "frequencia":
+                    var f = poo[matricula][4];
+                    var freq = ((totHorasPoo-(f*2))/totHorasPoo)*100;
+                    resposta += "frequencia: "+freq.toFixed(2)+"%";
+                    break;
+                case "notasParciais":
+                    resposta = "notas parciais: "+poo[matricula][1]+", "+poo[matricula][2]+", "+poo[matricula][3];
+                    break;
+                case "mediaFinal":
+                    var media = (poo[matricula][1]+poo[matricula][2]+poo[matricula][3])/3;
+                    resposta = "media final: "+media.toFixed(2);
+                    break;
+                case "aprovacao":
+                    // Frequencia
+                    var f = poo[matricula][4];
+                    var freq = ((totHorasPoo-(f*2))/totHorasPoo)*100;
+                    // Media
+                    var media = (poo[matricula][1]+poo[matricula][2]+poo[matricula][3])/3;
+                    if (freq >= 75 && media >= 7){
+                        resposta = "Aprovado";
+                    }else{
+                        resposta = "Reprovado";
+                    }
+                    break;
+                default:
+                    resposta = "opção inválida!"
+            }
+            document.getElementById("resposta").innerHTML = 
+                "Aluno: " + matriculaInformada + ", "+resposta;
+        }
+    </script>
+</body>
+</html>
+

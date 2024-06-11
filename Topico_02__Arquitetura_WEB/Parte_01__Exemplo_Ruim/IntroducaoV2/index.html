@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sistema Academico</title>
+    <script src="academico.js"></script>
+</head>
+<body>
+    <h1>Informações do estudante</h1>
+    <p>Entre a matricula do estudante:</p>
+    <input type="number" id="matriculaInformada">
+    <p>Selecione a opção desejada:</p>
+    <select id="opcaoDesejada" onchange="academico()">
+        <option value="nenhuma">Nenhuma</option>
+        <option value="frequencia">Frequencia</option>
+        <option value="notasParciais">Notas parciais</option>
+        <option value="mediaFinal">Media final</option>
+        <option value="aprovacao">Aprovacao</option>
+    </select>
+    <p id="resposta"></p>
+    
+    <script>
+        document.getElementById("resposta").innerHTML = "loading database";
+        carregaBD();
+    </script>
+</body>
+</html>
+
+
