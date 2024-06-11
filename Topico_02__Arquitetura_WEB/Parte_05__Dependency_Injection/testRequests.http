@@ -1,5 +1,0 @@
-GET http://localhost:8080/
-GET http://localhost:8080/livros
-GET http://localhost:8080/autores
-GET http://localhost:8080/livrosAutor?autor=Zezinho
-GET http://localhost:8080/livrosautor/zezinho/ano/2020
