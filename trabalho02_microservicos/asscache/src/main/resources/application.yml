@@ -4,7 +4,7 @@ spring:
   application:
     name: asscache
   rabbitmq:
-    host: localhost
+    host: rabbitmq
     port: 5672
     username: user
     password: password
@@ -17,6 +17,9 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
-
-scaa:
-  url: http://localhost:8080
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://nameserver:8761/eureka
