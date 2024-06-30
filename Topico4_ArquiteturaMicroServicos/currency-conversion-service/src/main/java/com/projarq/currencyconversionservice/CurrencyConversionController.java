@@ -13,9 +13,17 @@ import org.springframework.web.client.RestTemplate;
 @RestController
 public class CurrencyConversionController {
     private CurrencyExchangeProxy proxy;
+    private RabbitTemplate rabbitTemplate;
+    private FanoutExchange fanout;
 
-    public CurrencyConversionController(CurrencyExchangeProxy proxy) {
+    public CurrencyConversionController(
+        CurrencyExchangeProxy proxy,
+        RabbitTemplate rabbitTemplate,
+        FanoutExchange fanout
+    ) {
         this.proxy = proxy;
+        this.rabbitTemplate = rabbitTemplate;
+        this.fanout = fanout;
     }
 
     @GetMapping
@@ -44,9 +52,14 @@ public class CurrencyConversionController {
     }
 
     @GetMapping("/currency-conversion-feign/from/{from}/to/{to}/quantity/{quantity}")
-    public CurrencyConversion calculateCurrencyConversionFeign(@PathVariable String from, @PathVariable String to,
-            @PathVariable BigDecimal quantity) {
+    public CurrencyConversion calculateCurrencyConversionFeign(
+        @PathVariable String from,
+        @PathVariable String to,
+        @PathVariable BigDecimal quantity
+    ) {
         CurrencyConversion currencyConversion = proxy.retrieveExchangeValue(from, to);
+        HistoryDTO dto = new HistoryDTO(from, to);
+        rabbitTemplate.convertAndSend(fanout.getName(), "", dto);
         return new CurrencyConversion(
                 currencyConversion.getId(),
                 from, to, quantity,
