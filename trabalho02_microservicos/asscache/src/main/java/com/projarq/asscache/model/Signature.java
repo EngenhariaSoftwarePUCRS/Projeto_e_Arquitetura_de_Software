@@ -1,17 +1,32 @@
 package com.projarq.asscache.model;
 
-import jakarta.persistence.*;
-import java.time.LocalDateTime;
+import java.util.Date;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
 @Entity
 public class Signature {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long appId;
-    private Long clientId;
     private boolean active;
-    private LocalDateTime expiryDate;
+    private Date expiryDate;
+
+    public Signature() {
+    }
+
+    public Signature(Long id) {
+        this.id = id;
+    }
+
+    public Signature(Long id, boolean active, Date expiryDate) {
+        this.id = id;
+        this.active = active;
+        this.expiryDate = expiryDate;
+    }
 
     // Getters e Setters
     public Long getId() {
@@ -22,22 +37,6 @@ public class Signature {
         this.id = id;
     }
 
-    public Long getAppId() {
-        return appId;
-    }
-
-    public void setAppId(Long appId) {
-        this.appId = appId;
-    }
-
-    public Long getClientId() {
-        return clientId;
-    }
-
-    public void setClientId(Long clientId) {
-        this.clientId = clientId;
-    }
-
     public boolean isActive() {
         return active;
     }
@@ -46,11 +45,20 @@ public class Signature {
         this.active = active;
     }
 
-    public LocalDateTime getExpiryDate() {
+    public Date getExpiryDate() {
         return expiryDate;
     }
 
-    public void setExpiryDate(LocalDateTime expiryDate) {
+    public void setExpiryDate(Date expiryDate) {
         this.expiryDate = expiryDate;
+    }
+
+    @Override
+    public String toString() {
+        return "Signature{" +
+                "id=" + id +
+                ", active=" + active +
+                ", expiryDate=" + expiryDate +
+                '}';
     }
 }

@@ -1,5 +1,6 @@
 package com.projarq.trabalho02_microservicos.interfaceAdaptors.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,12 +88,30 @@ public class SignatureController {
         return signatureService.getAppSignatures(appId);
     }
 
-    /** Retorna se a assinatura questionada permanece ativa */
-    @GetMapping("/assinvalida/{codass}")
-    public boolean isSignatureActive(
+    /** Retorna a data de validade de uma assinatura */
+    @GetMapping("/assinaturas/validade/{codass}")
+    public ResponseEntity<Date> getSignatureEndDate(
         @PathVariable(value="codass") final Long signatureId
     ) {
-        return signatureService.isSignatureActive(signatureId);
+        try {
+            SignatureResponse signature = signatureService.getSignature(signatureId);
+            return new ResponseEntity<Date>(signature.getEndDate(), HttpStatus.OK);
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    /** Retorna se a assinatura questionada permanece ativa */
+    @GetMapping("/assinvalida/{codass}")
+    public ResponseEntity<Boolean> isSignatureActive(
+        @PathVariable(value="codass") final Long signatureId
+    ) {
+        try {
+            boolean isActive = signatureService.isSignatureActive(signatureId);
+            return new ResponseEntity<>(isActive, HttpStatus.OK);
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 
     @DeleteMapping("/servcad/assinaturas/{codass}")

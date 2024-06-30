@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.projarq</groupId>
-	<artifactId>trabalho02_microservicos</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>trabalho02_microservicos</name>
+	<artifactId>scaa</artifactId>
+	<version>0.0.1</version>
+	<name>scaa</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>21</java.version>

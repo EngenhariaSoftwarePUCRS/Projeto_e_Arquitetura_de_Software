@@ -6,7 +6,7 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.Optional;
 
 @Service
@@ -14,11 +14,11 @@ public class SignatureService {
     @Autowired
     private SignatureRepository signatureRepository;
 
-    public boolean isSignatureActive(Long appId) {
-        Optional<Signature> signatureOpt = signatureRepository.findByAppId(appId);
+    public boolean isSignatureActive(Long signatureId) {
+        Optional<Signature> signatureOpt = signatureRepository.findById(signatureId);
         if (signatureOpt.isPresent()) {
             Signature signature = signatureOpt.get();
-            if (signature.getExpiryDate().isAfter(LocalDateTime.now())) {
+            if (signature.getExpiryDate().after(new Date())) {
                 return signature.isActive();
             }
         }
@@ -29,7 +29,7 @@ public class SignatureService {
 
     @RabbitListener(queues = "signature.update.queue")
     public void handleSignatureUpdate(String message) {
-        Long appId = Long.parseLong(message);
-        signatureRepository.deleteByAppId(appId);
+        Long signatureId = Long.parseLong(message);
+        signatureRepository.deleteById(signatureId);
     }
 }

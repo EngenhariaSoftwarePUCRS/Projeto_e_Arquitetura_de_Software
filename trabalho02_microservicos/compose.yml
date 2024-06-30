@@ -1,4 +1,13 @@
 services:
+  scaa:
+    build: scaa
+    image: scaa
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_RABBITMQ_HOST: rabbitmq
+    networks:
+      - scaa-network
   asscache:
     build: asscache
     image: asscache
@@ -12,6 +21,7 @@ services:
       SPRING_DATASOURCE_PASSWORD:
       SPRING_JPA_HIBERNATE_DDL_AUTO: update
       SPRING_JPA_SHOW_SQL: true
+      SCAA_URL: http://scaa:8080
     depends_on:
       - rabbitmq
     networks:
