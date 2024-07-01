@@ -187,7 +187,7 @@ public class SignatureService implements ISignatureUseCases {
             // TODO: Check that endDate > startDate
             signatureRepository.updateSignature(signatureId, endDate);
             SignatureEntity signature = signatureRepository.getSignature(signatureId);
-            rabbitTemplate.convertAndSend("subscription-update-queue", signature);
+            rabbitTemplate.convertAndSend("signature-update-queue", signature);
         } catch (EmptyResultDataAccessException e) {
             throw new IllegalArgumentException("Signature not found");
         }
@@ -197,6 +197,9 @@ public class SignatureService implements ISignatureUseCases {
     public void cancelSignature(Long signatureId) throws IllegalArgumentException {
         try {
             signatureRepository.updateSignature(signatureId, new Date());
+            SignatureEntity signature = signatureRepository.getSignature(signatureId);
+            System.out.println("\n\n\nSIGNATURE: " + signature + "\n\n\n");
+            rabbitTemplate.convertAndSend("signature-update-queue", signature);
         } catch (EmptyResultDataAccessException e) {
             throw new IllegalArgumentException("Signature not found");
         }

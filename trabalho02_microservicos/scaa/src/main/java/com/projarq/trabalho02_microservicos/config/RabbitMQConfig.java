@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 public class RabbitMQConfig {
 
     @Bean
-    public Queue subscriptionUpdateQueue() {
-        return new Queue("subscription-update-queue", false);
+    public Queue signatureUpdateQueue() {
+        return new Queue("signature-update-queue", false);
     }
 }
