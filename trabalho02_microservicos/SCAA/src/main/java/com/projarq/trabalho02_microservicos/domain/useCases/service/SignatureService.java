@@ -4,6 +4,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
@@ -23,16 +24,19 @@ public class SignatureService implements ISignatureUseCases {
     private IAppUseCases appService;
     private IClientUseCases clientService;
     private ISignatureRepository signatureRepository;
+    private RabbitTemplate rabbitTemplate;
 
     @Autowired
     public SignatureService(
         IAppUseCases appService,
         IClientUseCases clientService,
-        ISignatureRepository signatureRepository
+        ISignatureRepository signatureRepository,
+        RabbitTemplate rabbitTemplate
     ) {
         this.appService = appService;
         this.clientService = clientService;
         this.signatureRepository = signatureRepository;
+        this.rabbitTemplate = rabbitTemplate;
     }
 
     @Override
@@ -182,6 +186,8 @@ public class SignatureService implements ISignatureUseCases {
         try {
             // TODO: Check that endDate > startDate
             signatureRepository.updateSignature(signatureId, endDate);
+            SignatureEntity signature = signatureRepository.getSignature(signatureId);
+            rabbitTemplate.convertAndSend("subscription-update-queue", signature);
         } catch (EmptyResultDataAccessException e) {
             throw new IllegalArgumentException("Signature not found");
         }

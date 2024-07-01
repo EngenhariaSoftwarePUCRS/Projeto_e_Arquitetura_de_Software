@@ -9,13 +9,13 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class RabbitMQConfig {
-    public static final String QUEUE_NAME = "signature.update.queue";
-    public static final String EXCHANGE_NAME = "signature.update.exchange";
-    public static final String ROUTING_KEY = "signature.update.routingkey";
+    public static final String QUEUE_NAME = "signature-update-queue";
+    public static final String EXCHANGE_NAME = "signature-update-exchange";
+    public static final String ROUTING_KEY = "signature-update-routingkey";
 
     @Bean
     public Queue queue() {
-        return new Queue(QUEUE_NAME, true);
+        return new Queue(QUEUE_NAME, false);
     }
 
     @Bean
