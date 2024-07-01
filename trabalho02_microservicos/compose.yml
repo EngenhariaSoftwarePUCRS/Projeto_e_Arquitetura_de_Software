@@ -41,8 +41,8 @@ services:
     ports:
       - "8080:8080"
     depends_on:
-      - gateway
       - rabbitmq
+      - gateway
     networks:
       - scaa-network
     volumes:

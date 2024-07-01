@@ -3,6 +3,11 @@ server:
 spring:
   application:
     name: scaa
+  rabbitmq:
+    host: rabbitmq
+    port: 5672
+    username: user
+    password: password
   datasource:
     initialization-mode: always
     schema-locations: classpath*:/create.sql
@@ -19,8 +24,3 @@ eureka:
     fetchRegistry: true
     serviceUrl:
       defaultZone: http://nameserver:8761/eureka
-rabbitmq:
-  host: rabbitmq
-  port: 5672
-  username: user
-  password: password
