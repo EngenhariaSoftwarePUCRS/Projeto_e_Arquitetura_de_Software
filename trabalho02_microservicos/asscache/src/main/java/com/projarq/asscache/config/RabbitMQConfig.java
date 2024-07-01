@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class RabbitMQConfig {
-    public static final String QUEUE_NAME = "signature-update-queue";
+    public static final String QUEUE_NAME = "signature-update-queue" + Math.random() * 1000;
     public static final String EXCHANGE_NAME = "signature-update-exchange";
     public static final String ROUTING_KEY = "signature-update-routingkey";
 

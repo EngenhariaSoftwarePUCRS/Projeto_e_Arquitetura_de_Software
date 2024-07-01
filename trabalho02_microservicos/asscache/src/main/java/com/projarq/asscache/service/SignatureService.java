@@ -27,7 +27,7 @@ public class SignatureService {
         return false;
     }
 
-    @RabbitListener(queues = "signature.update.queue")
+    @RabbitListener(queues = "#{rabbitMQConfig.queue().getName()}")
     public void handleSignatureUpdate(String message) {
         Long signatureId = Long.parseLong(message);
         signatureRepository.deleteById(signatureId);

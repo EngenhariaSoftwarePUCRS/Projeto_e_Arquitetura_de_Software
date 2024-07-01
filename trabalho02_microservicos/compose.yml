@@ -45,5 +45,7 @@ services:
       - rabbitmq
     networks:
       - scaa-network
+    volumes:
+      - ./scaa/src/main/resources:/app/src/main/resources
 networks:
   scaa-network:

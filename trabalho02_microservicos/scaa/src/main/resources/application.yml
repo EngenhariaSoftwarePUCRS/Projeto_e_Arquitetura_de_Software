@@ -1,14 +1,18 @@
 server:
-  port: 8672
+  port: 8080
 spring:
   application:
     name: scaa
-sql:
-    init:
-        mode: always
-        schema-locations: classpath*:/create.sql
-        data-locations: classpath*:/insert.sql
-        encoding: UTF-8
+  datasource:
+    initialization-mode: always
+    schema-locations: classpath*:/create.sql
+    data-locations: classpath*:/insert.sql
+  sql:
+      init:
+          mode: always
+          schema-locations: classpath*:/create.sql
+          data-locations: classpath*:/insert.sql
+          encoding: UTF-8
 eureka:
   client:
     registerWithEureka: true

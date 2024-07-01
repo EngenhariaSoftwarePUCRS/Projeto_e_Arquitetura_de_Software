@@ -21,6 +21,12 @@ spring:
             - Path=/scaa/**
           filters:
             - RewritePath=/scaa/(?<segment>.*), /$\{segment}
+        - id: nameserver
+          uri: lb://NAMESERVER
+          predicates:
+            - Path=/nameserver/**
+          filters:
+            - RewritePath=/nameserver/(?<segment>.*), /$\{segment}
 eureka:
   client:
     serviceUrl:
